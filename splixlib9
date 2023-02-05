@@ -61,21 +61,6 @@ local theme = {
 }
 -- // Utility Functions
 do
-    function UDim2.new(xScale,xOffset,yScale,yOffset,instance)
-        if instance then
-            local x = xScale*instance.Size.x+xOffset
-            local y = yScale*instance.Size.y+yOffset
-            --
-            return Vector2.new(x,y)
-        else
-            local vx,vy = ws.CurrentCamera.ViewportSize.x,ws.CurrentCamera.ViewportSize.y
-            --
-            local x = xScale*vx+xOffset
-            local y = yScale*vy+yOffset
-            --
-            return Vector2.new(x,y)
-        end
-    end
     --
 	function utility:Create(instanceType, instanceOffset, instanceProperties, instanceParent)
         local instanceType = instanceType or "Frame"
