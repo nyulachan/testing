@@ -53,7 +53,7 @@ local theme = {
     dark_contrast = Color3.fromRGB(20, 20, 20),
     outline = Color3.fromRGB(0, 0, 0),
     inline = Color3.fromRGB(50, 50, 50),
-    textcolor = Color3.fromRGB(255, 255, 255),
+    textBackgroundColor3 = Color3.fromRGB(255, 255, 255),
     textborder = Color3.fromRGB(0, 0, 0),
     cursoroutline = Color3.fromRGB(10, 10, 10),
     font = 2,
@@ -115,7 +115,7 @@ do
             text.Visible = true
             text.Outline = true
             text.Center = false
-            text.Color = Color3.fromRGB(255,255,255)
+            text.BackgroundColor3 = Color3.fromRGB(255,255,255)
             text.ZIndex = 50
             text.Transparency = library.shared.initialized and 1 or 0
             instance = text
@@ -124,7 +124,7 @@ do
             frame.Visible = true
             frame.Filled = true
             frame.Thickness = 0
-            frame.Color = Color3.fromRGB(255,255,255)
+            frame.BackgroundColor3 = Color3.fromRGB(255,255,255)
             frame.ZIndex = 50
             frame.Transparency = library.shared.initialized and 1 or 0
             instance = frame
@@ -139,7 +139,7 @@ do
         elseif instanceType == "Circle" or instanceType == "circle" then
             local circle = Drawing.new("Circle")
             circle.Visible = false
-            circle.Color = Color3.fromRGB(255, 0, 0)
+            circle.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
             circle.Thickness = 1
             circle.NumSides = 30
             circle.Filled = true
@@ -151,7 +151,7 @@ do
         elseif instanceType == "Quad" or instanceType == "quad" then
             local quad = Drawing.new("Quad")
             quad.Visible = false
-            quad.Color = Color3.fromRGB(255, 255, 255)
+            quad.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             quad.Thickness = 1.5
             quad.Transparency = 1
             quad.ZIndex = 50
@@ -161,7 +161,7 @@ do
         elseif instanceType == "Line" or instanceType == "line" then
             local line = Drawing.new("Line")
             line.Visible = false
-            line.Color = Color3.fromRGB(255, 255, 255)
+            line.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             line.Thickness = 1.5
             line.Transparency = 1
             line.Thickness = 1.5
@@ -378,64 +378,64 @@ do
         local main_frame = utility:Create("Frame", {Vector2.new(0,0)}, {
             Size = utility:Size(0, size.X, 0, size.Y),
             Position = utility:Position(0.5, -(size.X/2) ,0.5, -(size.Y/2)),
-            Color = theme.outline
+            BackgroundColor3 = theme.outline
         });window["main_frame"] = main_frame
         --
         local frame_inline = utility:Create("Frame", {Vector2.new(1,1), main_frame}, {
             Size = utility:Size(1, -2, 1, -2, main_frame),
             Position = utility:Position(0, 1, 0, 1, main_frame),
-            Color = theme.accent
+            BackgroundColor3 = theme.accent
         })
         --
         local inner_frame = utility:Create("Frame", {Vector2.new(1,1), frame_inline}, {
             Size = utility:Size(1, -2, 1, -2, frame_inline),
             Position = utility:Position(0, 1, 0, 1, frame_inline),
-            Color = theme.light_contrast
+            BackgroundColor3 = theme.light_contrast
         })
         --
         local title = utility:Create("TextLabel", {Vector2.new(4,2), inner_frame}, {
             Text = name,
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
-            OutlineColor = theme.textborder,
+            BackgroundColor3 = theme.textcolor,
+            OutlineBackgroundColor3 = theme.textborder,
             Position = utility:Position(0, 4, 0, 2, inner_frame)
         })
         --
         local inner_frame_inline = utility:Create("Frame", {Vector2.new(4,18), inner_frame}, {
             Size = utility:Size(1, -8, 1, -22, inner_frame),
             Position = utility:Position(0, 4, 0, 18, inner_frame),
-            Color = theme.inline
+            BackgroundColor3 = theme.inline
         })
         --
         local inner_frame_inline2 = utility:Create("Frame", {Vector2.new(1,1), inner_frame_inline}, {
             Size = utility:Size(1, -2, 1, -2, inner_frame_inline),
             Position = utility:Position(0, 1, 0, 1, inner_frame_inline),
-            Color = theme.outline
+            BackgroundColor3 = theme.outline
         })
         --
         local back_frame = utility:Create("Frame", {Vector2.new(1,1), inner_frame_inline2}, {
             Size = utility:Size(1, -2, 1, -2, inner_frame_inline2),
             Position = utility:Position(0, 1, 0, 1, inner_frame_inline2),
-            Color = theme.dark_contrast
+            BackgroundColor3 = theme.dark_contrast
         });window["back_frame"] = back_frame
         --
         local tab_frame_inline = utility:Create("Frame", {Vector2.new(4,24), back_frame}, {
             Size = utility:Size(1, -8, 1, -28, back_frame),
             Position = utility:Position(0, 4, 0, 24, back_frame),
-            Color = theme.outline
+            BackgroundColor3 = theme.outline
         })
         --
         local tab_frame_inline2 = utility:Create("Frame", {Vector2.new(1,1), tab_frame_inline}, {
             Size = utility:Size(1, -2, 1, -2, tab_frame_inline),
             Position = utility:Position(0, 1, 0, 1, tab_frame_inline),
-            Color = theme.inline
+            BackgroundColor3 = theme.inline
         })
         --
         local tab_frame = utility:Create("Frame", {Vector2.new(1,1), tab_frame_inline2}, {
             Size = utility:Size(1, -2, 1, -2, tab_frame_inline2),
             Position = utility:Position(0, 1, 0, 1, tab_frame_inline2),
-            Color = theme.light_contrast
+            BackgroundColor3 = theme.light_contrast
         });window["tab_frame"] = tab_frame
         --
         function window:GetConfig()
@@ -444,7 +444,7 @@ do
             for i,v in pairs(library.pointers) do
                 if typeof(v:Get()) == "table" and v:Get().Transparency then
                     local hue, sat, val = v:Get().Color:ToHSV()
-                    config[i] = {Color = {hue, sat, val}, Transparency = v:Get().Transparency}
+                    config[i] = {BackgroundColor3 = {hue, sat, val}, Transparency = v:Get().Transparency}
                 else
                     config[i] = v:Get()
                 end
@@ -609,7 +609,7 @@ do
                 Position = utility:Position(0, 100, 0, 38/2-10),
                 Hidden = true,
                 ZIndex = 60,
-                Color = theme.outline,
+                BackgroundColor3 = theme.outline,
                 Visible = window.watermark.visible
             })window.watermark.outline = watermark_outline
             --
@@ -618,7 +618,7 @@ do
                 Position = utility:Position(0, 1, 0, 1, watermark_outline),
                 Hidden = true,
                 ZIndex = 60,
-                Color = theme.inline,
+                BackgroundColor3 = theme.inline,
                 Visible = window.watermark.visible
             })
             --
@@ -627,7 +627,7 @@ do
                 Position = utility:Position(0, 1, 0, 1, watermark_inline),
                 Hidden = true,
                 ZIndex = 60,
-                Color = theme.light_contrast,
+                BackgroundColor3 = theme.light_contrast,
                 Visible = window.watermark.visible
             })
             --
@@ -636,7 +636,7 @@ do
                 Position = utility:Position(0, 0, 0, 0, watermark_frame),
                 Hidden = true,
                 ZIndex = 60,
-                Color = theme.accent,
+                BackgroundColor3 = theme.accent,
                 Visible = window.watermark.visible
             })
             --
@@ -644,8 +644,8 @@ do
                 Text = string.format("splix - fps : %u - uid : %u", 35, 2),
                 Size = theme.textsize,
                 Font = theme.font,
-                Color = theme.textcolor,
-                OutlineColor = theme.textborder,
+                BackgroundColor3 = theme.textcolor,
+                OutlineBackgroundColor3 = theme.textborder,
                 Hidden = true,
                 ZIndex = 60,
                 Position = utility:Position(0, 2 + 6, 0, 4, watermark_outline),
@@ -702,7 +702,7 @@ do
                 Position = utility:Position(0, 10, 0.4, 0),
                 Hidden = true,
                 ZIndex = 55,
-                Color = theme.outline,
+                BackgroundColor3 = theme.outline,
                 Visible = window.keybindslist.visible
             })window.keybindslist.outline = keybindslist_outline
             --
@@ -711,7 +711,7 @@ do
                 Position = utility:Position(0, 1, 0, 1, keybindslist_outline),
                 Hidden = true,
                 ZIndex = 55,
-                Color = theme.inline,
+                BackgroundColor3 = theme.inline,
                 Visible = window.keybindslist.visible
             })
             --
@@ -720,7 +720,7 @@ do
                 Position = utility:Position(0, 1, 0, 1, keybindslist_inline),
                 Hidden = true,
                 ZIndex = 55,
-                Color = theme.light_contrast,
+                BackgroundColor3 = theme.light_contrast,
                 Visible = window.keybindslist.visible
             })
             --
@@ -729,7 +729,7 @@ do
                 Position = utility:Position(0, 0, 0, 0, keybindslist_frame),
                 Hidden = true,
                 ZIndex = 55,
-                Color = theme.accent,
+                BackgroundColor3 = theme.accent,
                 Visible = window.keybindslist.visible
             })
             --
@@ -737,8 +737,8 @@ do
                 Text = "- Keybinds -",
                 Size = theme.textsize,
                 Font = theme.font,
-                Color = theme.textcolor,
-                OutlineColor = theme.textborder,
+                BackgroundColor3 = theme.textcolor,
+                OutlineBackgroundColor3 = theme.textborder,
                 Center = true,
                 Hidden = true,
                 ZIndex = 55,
@@ -764,7 +764,7 @@ do
                         Position = utility:Position(0, 0, 1, -1, keybindslist_outline),
                         Hidden = true,
                         ZIndex = 55,
-                        Color = theme.outline,
+                        BackgroundColor3 = theme.outline,
                         Visible = window.keybindslist.visible
                     })
                     --
@@ -773,7 +773,7 @@ do
                         Position = utility:Position(0, 1, 0, 1, keybind_outline),
                         Hidden = true,
                         ZIndex = 55,
-                        Color = theme.inline,
+                        BackgroundColor3 = theme.inline,
                         Visible = window.keybindslist.visible
                     })
                     --
@@ -782,7 +782,7 @@ do
                         Position = utility:Position(0, 1, 0, 1, keybind_inline),
                         Hidden = true,
                         ZIndex = 55,
-                        Color = theme.dark_contrast,
+                        BackgroundColor3 = theme.dark_contrast,
                         Visible = window.keybindslist.visible
                     })
                     --
@@ -790,8 +790,8 @@ do
                         Text = keybindname,
                         Size = theme.textsize,
                         Font = theme.font,
-                        Color = theme.textcolor,
-                        OutlineColor = theme.textborder,
+                        BackgroundColor3 = theme.textcolor,
+                        OutlineBackgroundColor3 = theme.textborder,
                         Center = false,
                         Hidden = true,
                         ZIndex = 55,
@@ -803,8 +803,8 @@ do
                         Text = "["..keybindvalue.."]",
                         Size = theme.textsize,
                         Font = theme.font,
-                        Color = theme.textcolor,
-                        OutlineColor = theme.textborder,
+                        BackgroundColor3 = theme.textcolor,
+                        OutlineBackgroundColor3 = theme.textborder,
                         Hidden = true,
                         ZIndex = 55,
                         Position = utility:Position(1, -4 - utility:GetTextBounds(keybindname, theme.textsize, theme.font).X, 0, 3, keybind_outline),
@@ -885,7 +885,7 @@ do
             window.cursor = {}
             --
             local cursor = utility:Create("Triangle", nil, {
-                Color = theme.cursoroutline,
+                BackgroundColor3 = theme.cursoroutline,
                 Thickness = 2.5,
                 Filled = false,
                 ZIndex = 65,
@@ -893,7 +893,7 @@ do
             });window.cursor["cursor"] = cursor
             --
             local cursor_inline = utility:Create("Triangle", nil, {
-                Color = theme.accent,
+                BackgroundColor3 = theme.accent,
                 Filled = true,
                 Thickness = 0,
                 ZIndex = 65,
@@ -1051,28 +1051,28 @@ do
         local page_button = utility:Create("Frame", {Vector2.new(position,4), window.back_frame}, {
             Size = utility:Size(0, textbounds.X+20, 0, 21),
             Position = utility:Position(0, position, 0, 4, window.back_frame),
-            Color = theme.outline
+            BackgroundColor3 = theme.outline
         });page["page_button"] = page_button
         --
         local page_button_inline = utility:Create("Frame", {Vector2.new(1,1), page_button}, {
             Size = utility:Size(1, -2, 1, -1, page_button),
             Position = utility:Position(0, 1, 0, 1, page_button),
-            Color = theme.inline
+            BackgroundColor3 = theme.inline
         });page["page_button_inline"] = page_button_inline
         --
-        local page_button_color = utility:Create("Frame", {Vector2.new(1,1), page_button_inline}, {
+        local page_button_BackgroundColor3 = utility:Create("Frame", {Vector2.new(1,1), page_button_inline}, {
             Size = utility:Size(1, -2, 1, -1, page_button_inline),
             Position = utility:Position(0, 1, 0, 1, page_button_inline),
-            Color = theme.dark_contrast
+            BackgroundColor3 = theme.dark_contrast
         });page["page_button_color"] = page_button_color
         --
         local page_button_title = utility:Create("TextLabel", {Vector2.new(utility:Position(0.5, 0, 0, 2, page_button_color).X - page_button_color.Position.X,2), page_button_color}, {
             Text = name,
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
+            BackgroundColor3 = theme.textcolor,
             Center = true,
-            OutlineColor = theme.textborder,
+            OutlineBackgroundColor3 = theme.textborder,
             Position = utility:Position(0.5, 0, 0, 2, page_button_color)
         })
         --
@@ -1093,7 +1093,7 @@ do
         function page:Show()
             if window.currentPage then
                 window.currentPage.page_button_color.Size = utility:Size(1, -2, 1, -1, window.currentPage.page_button_inline)
-                window.currentPage.page_button_color.Color = theme.dark_contrast
+                window.currentPage.page_button_color.BackgroundColor3 = theme.dark_contrast
                 window.currentPage.open = false
                 --
                 for i,v in pairs(window.currentPage.sections) do
@@ -1107,7 +1107,7 @@ do
             --
             window.currentPage = page
             page_button_color.Size = utility:Size(1, -2, 1, 0, page_button_inline)
-            page_button_color.Color = theme.light_contrast
+            page_button_color.BackgroundColor3 = theme.light_contrast
             page.open = true
             --
             for i,v in pairs(page.sections) do
@@ -1138,28 +1138,28 @@ do
         local section_inline = utility:Create("Frame", {Vector2.new(side == "right" and (window.tab_frame.Size.X/2)+2 or 5,5 + page["sectionOffset"][side]), window.tab_frame}, {
             Size = utility:Size(0.5, -7, 0, 22, window.tab_frame),
             Position = utility:Position(side == "right" and 0.5 or 0, side == "right" and 2 or 5, 0, 5 + page.sectionOffset[side], window.tab_frame),
-            Color = theme.inline,
+            BackgroundColor3 = theme.inline,
             Visible = page.open
         }, section.visibleContent);section["section_inline"] = section_inline
         --
         local section_outline = utility:Create("Frame", {Vector2.new(1,1), section_inline}, {
             Size = utility:Size(1, -2, 1, -2, section_inline),
             Position = utility:Position(0, 1, 0, 1, section_inline),
-            Color = theme.outline,
+            BackgroundColor3 = theme.outline,
             Visible = page.open
         }, section.visibleContent);section["section_outline"] = section_outline
         --
         local section_frame = utility:Create("Frame", {Vector2.new(1,1), section_outline}, {
             Size = utility:Size(1, -2, 1, -2, section_outline),
             Position = utility:Position(0, 1, 0, 1, section_outline),
-            Color = theme.dark_contrast,
+            BackgroundColor3 = theme.dark_contrast,
             Visible = page.open
         }, section.visibleContent);section["section_frame"] = section_frame
         --
         local section_accent = utility:Create("Frame", {Vector2.new(0,0), section_frame}, {
             Size = utility:Size(1, 0, 0, 2, section_frame),
             Position = utility:Position(0, 0, 0, 0, section_frame),
-            Color = theme.accent,
+            BackgroundColor3 = theme.accent,
             Visible = page.open
         }, section.visibleContent);section["section_accent"] = section_accent
         --
@@ -1167,8 +1167,8 @@ do
             Text = name,
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
-            OutlineColor = theme.textborder,
+            BackgroundColor3 = theme.textcolor,
+            OutlineBackgroundColor3 = theme.textborder,
             Position = utility:Position(0, 3, 0, 3, section_frame),
             Visible = page.open
         }, section.visibleContent);section["section_title"] = section_title
@@ -1198,42 +1198,42 @@ do
         local multiSection_inline = utility:Create("Frame", {Vector2.new(side == "right" and (window.tab_frame.Size.X/2)+2 or 5,5 + page["sectionOffset"][side]), window.tab_frame}, {
             Size = utility:Size(0.5, -7, 0, size, window.tab_frame),
             Position = utility:Position(side == "right" and 0.5 or 0, side == "right" and 2 or 5, 0, 5 + page.sectionOffset[side], window.tab_frame),
-            Color = theme.inline,
+            BackgroundColor3 = theme.inline,
             Visible = page.open
         }, multiSection.visibleContent);multiSection["section_inline"] = multiSection_inline
         --
         local multiSection_outline = utility:Create("Frame", {Vector2.new(1,1), multiSection_inline}, {
             Size = utility:Size(1, -2, 1, -2, multiSection_inline),
             Position = utility:Position(0, 1, 0, 1, multiSection_inline),
-            Color = theme.outline,
+            BackgroundColor3 = theme.outline,
             Visible = page.open
         }, multiSection.visibleContent);multiSection["section_outline"] = multiSection_outline
         --
         local multiSection_frame = utility:Create("Frame", {Vector2.new(1,1), multiSection_outline}, {
             Size = utility:Size(1, -2, 1, -2, multiSection_outline),
             Position = utility:Position(0, 1, 0, 1, multiSection_outline),
-            Color = theme.dark_contrast,
+            BackgroundColor3 = theme.dark_contrast,
             Visible = page.open
         }, multiSection.visibleContent);multiSection["section_frame"] = multiSection_frame
         --
         local multiSection_backFrame = utility:Create("Frame", {Vector2.new(0,2), multiSection_frame}, {
             Size = utility:Size(1, 0, 0, 17, multiSection_frame),
             Position = utility:Position(0, 0, 0, 2, multiSection_frame),
-            Color = theme.light_contrast,
+            BackgroundColor3 = theme.light_contrast,
             Visible = page.open
         }, multiSection.visibleContent)
         --
         local multiSection_bottomFrame = utility:Create("Frame", {Vector2.new(0,multiSection_backFrame.Size.Y - 1), multiSection_backFrame}, {
             Size = utility:Size(1, 0, 0, 1, multiSection_backFrame),
             Position = utility:Position(0, 0, 1, -1, multiSection_backFrame),
-            Color = theme.outline,
+            BackgroundColor3 = theme.outline,
             Visible = page.open
         }, multiSection.visibleContent)
         --
         local multiSection_accent = utility:Create("Frame", {Vector2.new(0,0), multiSection_frame}, {
             Size = utility:Size(1, 0, 0, 2, multiSection_frame),
             Position = utility:Position(0, 0, 0, 0, multiSection_frame),
-            Color = theme.accent,
+            BackgroundColor3 = theme.accent,
             Visible = page.open
         }, multiSection.visibleContent);multiSection["section_accent"] = multiSection_accent
         --
@@ -1245,14 +1245,14 @@ do
             local msection_frame = utility:Create("Frame", {Vector2.new(multiSection.xAxis,0), multiSection_backFrame}, {
                 Size = utility:Size(0, textBounds.X + 14, 1, -1, multiSection_backFrame),
                 Position = utility:Position(0, multiSection.xAxis, 0, 0, multiSection_backFrame),
-                Color = i == 1 and theme.dark_contrast or theme.light_contrast,
+                BackgroundColor3 = i == 1 and theme.dark_contrast or theme.light_contrast,
                 Visible = page.open
             }, multiSection.visibleContent);msection["msection_frame"] = msection_frame
             --
             local msection_line = utility:Create("Frame", {Vector2.new(msection_frame.Size.X,0), msection_frame}, {
                 Size = utility:Size(0, 1, 1, 0, msection_frame),
                 Position = utility:Position(1, 0, 0, 0, msection_frame),
-                Color = theme.outline,
+                BackgroundColor3 = theme.outline,
                 Visible = page.open
             }, multiSection.visibleContent)
             --
@@ -1260,8 +1260,8 @@ do
                 Text = v,
                 Size = theme.textsize,
                 Font = theme.font,
-                Color = theme.textcolor,
-                OutlineColor = theme.textborder,
+                BackgroundColor3 = theme.textcolor,
+                OutlineBackgroundColor3 = theme.textborder,
                 Center = true,
                 Position = utility:Position(0.5, 0, 0, 1, msection_frame),
                 Visible = page.open
@@ -1270,7 +1270,7 @@ do
             local msection_bottomline = utility:Create("Frame", {Vector2.new(0,msection_frame.Size.Y), msection_frame}, {
                 Size = utility:Size(1, 0, 0, 1, msection_frame),
                 Position = utility:Position(0, 0, 1, 0, msection_frame),
-                Color = i == 1 and theme.dark_contrast or theme.outline,
+                BackgroundColor3 = i == 1 and theme.dark_contrast or theme.outline,
                 Visible = page.open
             }, multiSection.visibleContent);msection["msection_bottomline"] = msection_bottomline
             --
@@ -1286,16 +1286,16 @@ do
             --
             library.began[#library.began + 1] = function(Input)
                 if Input.UserInputType == Enum.UserInputType.MouseButton1 and window.isVisible and page.open and  utility:MouseOverDrawing({msection_frame.Position.X,msection_frame.Position.Y,msection_frame.Position.X + msection_frame.Size.X,msection_frame.Position.Y + msection_frame.Size.Y}) and multiSection.currentSection ~= msection and not window:IsOverContent() then
-                    multiSection.currentSection.msection_frame.Color = theme.light_contrast
-                    multiSection.currentSection.msection_bottomline.Color = theme.outline
+                    multiSection.currentSection.msection_frame.BackgroundColor3 = theme.light_contrast
+                    multiSection.currentSection.msection_bottomline.BackgroundColor3 = theme.outline
                     --
                     for i,v in pairs(multiSection.currentSection.visibleContent) do
                         v.Visible = false
                     end
                     --
                     multiSection.currentSection = msection
-                    msection_frame.Color = theme.dark_contrast
-                    msection_bottomline.Color = theme.dark_contrast
+                    msection_frame.BackgroundColor3 = theme.dark_contrast
+                    msection_bottomline.BackgroundColor3 = theme.dark_contrast
                     --
                     for i,v in pairs(multiSection.currentSection.visibleContent) do
                         v.Visible = true
@@ -1339,8 +1339,8 @@ do
             Text = name,
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
-            OutlineColor = theme.textborder,
+            BackgroundColor3 = theme.textcolor,
+            OutlineBackgroundColor3 = theme.textborder,
             Center = middle,
             Position = utility:Position(middle and 0.5 or 0, middle and 0 or 4, 0, 0, section.section_frame),
             Visible = page.open
@@ -1372,21 +1372,21 @@ do
         local toggle_outline = utility:Create("Frame", {Vector2.new(4,toggle.axis), section.section_frame}, {
             Size = utility:Size(0, 15, 0, 15),
             Position = utility:Position(0, 4, 0, toggle.axis, section.section_frame),
-            Color = theme.outline,
+            BackgroundColor3 = theme.outline,
             Visible = page.open
         }, section.visibleContent)
         --
         local toggle_inline = utility:Create("Frame", {Vector2.new(1,1), toggle_outline}, {
             Size = utility:Size(1, -2, 1, -2, toggle_outline),
             Position = utility:Position(0, 1, 0, 1, toggle_outline),
-            Color = theme.inline,
+            BackgroundColor3 = theme.inline,
             Visible = page.open
         }, section.visibleContent)
         --
         local toggle_frame = utility:Create("Frame", {Vector2.new(1,1), toggle_inline}, {
             Size = utility:Size(1, -2, 1, -2, toggle_inline),
             Position = utility:Position(0, 1, 0, 1, toggle_inline),
-            Color = toggle.current == true and theme.accent or theme.light_contrast,
+            BackgroundColor3 = toggle.current == true and theme.accent or theme.light_contrast,
             Visible = page.open
         }, section.visibleContent)
         --
@@ -1401,8 +1401,8 @@ do
             Text = name,
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
-            OutlineColor = theme.textborder,
+            BackgroundColor3 = theme.textcolor,
+            OutlineBackgroundColor3 = theme.textborder,
             Position = utility:Position(0, 23, 0, toggle.axis + (15/2) - (utility:GetTextBounds(name, theme.textsize, theme.font).Y/2), section.section_frame),
             Visible = page.open
         }, section.visibleContent)
@@ -1416,7 +1416,7 @@ do
         function toggle:Set(bool)
             if bool or not bool then
                 toggle.current = bool
-                toggle_frame.Color = toggle.current == true and theme.accent or theme.light_contrast
+                toggle_frame.BackgroundColor3 = toggle.current == true and theme.accent or theme.light_contrast
                 --
                 callback(toggle.current)
             end
@@ -1425,7 +1425,7 @@ do
         library.began[#library.began + 1] = function(Input)
             if Input.UserInputType == Enum.UserInputType.MouseButton1 and toggle_outline.Visible and window.isVisible and page.open and utility:MouseOverDrawing({section.section_frame.Position.X, section.section_frame.Position.Y + toggle.axis, section.section_frame.Position.X + section.section_frame.Size.X - toggle.addedAxis, section.section_frame.Position.Y + toggle.axis + 15}) and not window:IsOverContent() then
                 toggle.current = not toggle.current
-                toggle_frame.Color = toggle.current == true and theme.accent or theme.light_contrast
+                toggle_frame.BackgroundColor3 = toggle.current == true and theme.accent or theme.light_contrast
                 --
                 callback(toggle.current)
                 --
@@ -1454,14 +1454,14 @@ do
             local colorpicker_outline = utility:Create("Frame", {Vector2.new(section.section_frame.Size.X-(toggle.colorpickers == 0 and (30+4) or (64 + 4)),colorpicker.axis), section.section_frame}, {
                 Size = utility:Size(0, 30, 0, 15),
                 Position = utility:Position(1, -(toggle.colorpickers == 0 and (30+4) or (64 + 4)), 0, colorpicker.axis, section.section_frame),
-                Color = theme.outline,
+                BackgroundColor3 = theme.outline,
                 Visible = page.open
             }, section.visibleContent)
             --
             local colorpicker_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_outline}, {
                 Size = utility:Size(1, -2, 1, -2, colorpicker_outline),
                 Position = utility:Position(0, 1, 0, 1, colorpicker_outline),
-                Color = theme.inline,
+                BackgroundColor3 = theme.inline,
                 Visible = page.open
             }, section.visibleContent)
             --
@@ -1477,7 +1477,7 @@ do
             local colorpicker_frame = utility:Create("Frame", {Vector2.new(1,1), colorpicker_inline}, {
                 Size = utility:Size(1, -2, 1, -2, colorpicker_inline),
                 Position = utility:Position(0, 1, 0, 1, colorpicker_inline),
-                Color = def,
+                BackgroundColor3 = def,
                 Transparency = transp and (1 - transp) or 1,
                 Visible = page.open
             }, section.visibleContent)
@@ -1499,19 +1499,19 @@ do
                     if color.Color and color.Transparency then
                         local h, s, v = table.unpack(color.Color)
                         colorpicker.current = {h, s, v , color.Transparency}
-                        colorpicker_frame.Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                        colorpicker_frame.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                         colorpicker_frame.Transparency = 1 - colorpicker.current[4]
                         callback(Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3]), colorpicker.current[4])
                     else
                         colorpicker.current = color
-                        colorpicker_frame.Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                        colorpicker_frame.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                         colorpicker_frame.Transparency = 1 - colorpicker.current[4]
                         callback(Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3]), colorpicker.current[4])
                     end
                 elseif typeof(color) == "color3" then
                     local h, s, v = color:ToHSV()
                     colorpicker.current = {h, s, v, (transp_val or 0)}
-                    colorpicker_frame.Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                    colorpicker_frame.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                     colorpicker_frame.Transparency = 1 - colorpicker.current[4]
                     callback(Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3]), colorpicker.current[4]) 
                 end
@@ -1529,7 +1529,7 @@ do
                     utility:UpdateOffset(colorpicker.holder.picker_cursor, {Vector2.new((colorpicker.holder.picker.Size.X*colorpicker.current[2])-3,(colorpicker.holder.picker.Size.Y*(1-colorpicker.current[3]))-3), colorpicker.holder.picker})
                     --
                     if colorpicker.holder.transparencybg then
-                        colorpicker.holder.transparencybg.Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                        colorpicker.holder.transparencybg.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                     end
                 elseif colorpicker.open and colorpicker.holder.huepicker and colorpicker.holding.huepicker then
                     colorpicker.current[1] = (math.clamp(mouseLocation.Y - colorpicker.holder.huepicker.Position.Y, 0, colorpicker.holder.huepicker.Size.Y) / colorpicker.holder.huepicker.Size.Y)
@@ -1537,18 +1537,18 @@ do
                     colorpicker.holder.huepicker_cursor[1].Position = utility:Position(0, -3, colorpicker.current[1], -3, colorpicker.holder.huepicker)
                     colorpicker.holder.huepicker_cursor[2].Position = utility:Position(0, 1, 0, 1, colorpicker.holder.huepicker_cursor[1])
                     colorpicker.holder.huepicker_cursor[3].Position = utility:Position(0, 1, 0, 1, colorpicker.holder.huepicker_cursor[2])
-                    colorpicker.holder.huepicker_cursor[3].Color = Color3.fromHSV(colorpicker.current[1], 1, 1)
+                    colorpicker.holder.huepicker_cursor[3].BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], 1, 1)
                     --
                     utility:UpdateOffset(colorpicker.holder.huepicker_cursor[1], {Vector2.new(-3,(colorpicker.holder.huepicker.Size.Y*colorpicker.current[1])-3), colorpicker.holder.huepicker})
                     --
-                    colorpicker.holder.background.Color = Color3.fromHSV(colorpicker.current[1], 1, 1)
+                    colorpicker.holder.background.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], 1, 1)
                     --
                     if colorpicker.holder.transparency_cursor and colorpicker.holder.transparency_cursor[3] then
-                        colorpicker.holder.transparency_cursor[3].Color = Color3.fromHSV(0, 0, 1 - colorpicker.current[4])
+                        colorpicker.holder.transparency_cursor[3].BackgroundColor3 = Color3.fromHSV(0, 0, 1 - colorpicker.current[4])
                     end
                     --
                     if colorpicker.holder.transparencybg then
-                        colorpicker.holder.transparencybg.Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                        colorpicker.holder.transparencybg.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                     end
                 elseif colorpicker.open and colorpicker.holder.transparency and colorpicker.holding.transparency then
                     colorpicker.current[4] = 1 - (math.clamp(mouseLocation.X - colorpicker.holder.transparency.Position.X, 0, colorpicker.holder.transparency.Size.X) / colorpicker.holder.transparency.Size.X)
@@ -1556,20 +1556,20 @@ do
                     colorpicker.holder.transparency_cursor[1].Position = utility:Position(1-colorpicker.current[4], -3, 0, -3, colorpicker.holder.transparency)
                     colorpicker.holder.transparency_cursor[2].Position = utility:Position(0, 1, 0, 1, colorpicker.holder.transparency_cursor[1])
                     colorpicker.holder.transparency_cursor[3].Position = utility:Position(0, 1, 0, 1, colorpicker.holder.transparency_cursor[2])
-                    colorpicker.holder.transparency_cursor[3].Color = Color3.fromHSV(0, 0, 1 - colorpicker.current[4])
+                    colorpicker.holder.transparency_cursor[3].BackgroundColor3 = Color3.fromHSV(0, 0, 1 - colorpicker.current[4])
                     colorpicker_frame.Transparency = (1 - colorpicker.current[4])
                     --
                     utility:UpdateTransparency(colorpicker_frame, (1 - colorpicker.current[4]))
                     utility:UpdateOffset(colorpicker.holder.transparency_cursor[1], {Vector2.new((colorpicker.holder.transparency.Size.X*(1-colorpicker.current[4]))-3,-3), colorpicker.holder.transparency})
                     --
-                    colorpicker.holder.background.Color = Color3.fromHSV(colorpicker.current[1], 1, 1)
+                    colorpicker.holder.background.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], 1, 1)
                 end
                 --
                 colorpicker:Set(colorpicker.current)
             end
             --
             function colorpicker:Get()
-                return {Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3]), Transparency = colorpicker.current[4]}
+                return {BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3]), Transparency = colorpicker.current[4]}
             end
             --
             library.began[#library.began + 1] = function(Input)
@@ -1593,52 +1593,52 @@ do
                             local colorpicker_open_outline = utility:Create("Frame", {Vector2.new(4,colorpicker.axis + 19), section.section_frame}, {
                                 Size = utility:Size(1, -8, 0, transp and 219 or 200, section.section_frame),
                                 Position = utility:Position(0, 4, 0, colorpicker.axis + 19, section.section_frame),
-                                Color = theme.outline
+                                BackgroundColor3 = theme.outline
                             }, colorpicker.holder.drawings);colorpicker.holder.inline = colorpicker_open_outline
                             --
                             local colorpicker_open_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_outline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_outline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_outline),
-                                Color = theme.inline
+                                BackgroundColor3 = theme.inline
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_frame = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_inline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_inline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_inline),
-                                Color = theme.dark_contrast
+                                BackgroundColor3 = theme.dark_contrast
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_accent = utility:Create("Frame", {Vector2.new(0,0), colorpicker_open_frame}, {
                                 Size = utility:Size(1, 0, 0, 2, colorpicker_open_frame),
                                 Position = utility:Position(0, 0, 0, 0, colorpicker_open_frame),
-                                Color = theme.accent
+                                BackgroundColor3 = theme.accent
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_title = utility:Create("TextLabel", {Vector2.new(4,2), colorpicker_open_frame}, {
                                 Text = cpinfo,
                                 Size = theme.textsize,
                                 Font = theme.font,
-                                Color = theme.textcolor,
-                                OutlineColor = theme.textborder,
+                                BackgroundColor3 = theme.textcolor,
+                                OutlineBackgroundColor3 = theme.textborder,
                                 Position = utility:Position(0, 4, 0, 2, colorpicker_open_frame),
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_picker_outline = utility:Create("Frame", {Vector2.new(4,17), colorpicker_open_frame}, {
                                 Size = utility:Size(1, -27, 1, transp and -40 or -21, colorpicker_open_frame),
                                 Position = utility:Position(0, 4, 0, 17, colorpicker_open_frame),
-                                Color = theme.outline
+                                BackgroundColor3 = theme.outline
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_picker_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_picker_outline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_picker_outline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_picker_outline),
-                                Color = theme.inline
+                                BackgroundColor3 = theme.inline
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_picker_bg = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_picker_inline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_picker_inline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_picker_inline),
-                                Color = Color3.fromHSV(colorpicker.current[1],1,1)
+                                BackgroundColor3 = Color3.fromHSV(colorpicker.current[1],1,1)
                             }, colorpicker.holder.drawings);colorpicker.holder.background = colorpicker_open_picker_bg
                             --
                             local colorpicker_open_picker_image = utility:Create("Image", {Vector2.new(0,0), colorpicker_open_picker_bg}, {
@@ -1654,13 +1654,13 @@ do
                             local colorpicker_open_huepicker_outline = utility:Create("Frame", {Vector2.new(colorpicker_open_frame.Size.X-19,17), colorpicker_open_frame}, {
                                 Size = utility:Size(0, 15, 1, transp and -40 or -21, colorpicker_open_frame),
                                 Position = utility:Position(1, -19, 0, 17, colorpicker_open_frame),
-                                Color = theme.outline
+                                BackgroundColor3 = theme.outline
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_huepicker_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_huepicker_outline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_huepicker_outline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_huepicker_outline),
-                                Color = theme.inline
+                                BackgroundColor3 = theme.inline
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_huepicker_image = utility:Create("Image", {Vector2.new(1,1), colorpicker_open_huepicker_inline}, {
@@ -1671,38 +1671,38 @@ do
                             local colorpicker_open_huepicker_cursor_outline = utility:Create("Frame", {Vector2.new(-3,(colorpicker_open_huepicker_image.Size.Y*colorpicker.current[1])-3), colorpicker_open_huepicker_image}, {
                                 Size = utility:Size(1, 6, 0, 6, colorpicker_open_huepicker_image),
                                 Position = utility:Position(0, -3, colorpicker.current[1], -3, colorpicker_open_huepicker_image),
-                                Color = theme.outline
+                                BackgroundColor3 = theme.outline
                             }, colorpicker.holder.drawings);colorpicker.holder.huepicker_cursor[1] = colorpicker_open_huepicker_cursor_outline
                             --
                             local colorpicker_open_huepicker_cursor_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_huepicker_cursor_outline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_huepicker_cursor_outline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_huepicker_cursor_outline),
-                                Color = theme.textcolor
+                                BackgroundColor3 = theme.textcolor
                             }, colorpicker.holder.drawings);colorpicker.holder.huepicker_cursor[2] = colorpicker_open_huepicker_cursor_inline
                             --
-                            local colorpicker_open_huepicker_cursor_color = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_huepicker_cursor_inline}, {
+                            local colorpicker_open_huepicker_cursor_BackgroundColor3 = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_huepicker_cursor_inline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_huepicker_cursor_inline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_huepicker_cursor_inline),
-                                Color = Color3.fromHSV(colorpicker.current[1], 1, 1)
+                                BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], 1, 1)
                             }, colorpicker.holder.drawings);colorpicker.holder.huepicker_cursor[3] = colorpicker_open_huepicker_cursor_color
                             --
                             if transp then
                                 local colorpicker_open_transparency_outline = utility:Create("Frame", {Vector2.new(4,colorpicker_open_frame.Size.X-19), colorpicker_open_frame}, {
                                     Size = utility:Size(1, -27, 0, 15, colorpicker_open_frame),
                                     Position = utility:Position(0, 4, 1, -19, colorpicker_open_frame),
-                                    Color = theme.outline
+                                    BackgroundColor3 = theme.outline
                                 }, colorpicker.holder.drawings)
                                 --
                                 local colorpicker_open_transparency_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_outline}, {
                                     Size = utility:Size(1, -2, 1, -2, colorpicker_open_transparency_outline),
                                     Position = utility:Position(0, 1, 0, 1, colorpicker_open_transparency_outline),
-                                    Color = theme.inline
+                                    BackgroundColor3 = theme.inline
                                 }, colorpicker.holder.drawings)
                                 --
                                 local colorpicker_open_transparency_bg = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_inline}, {
                                     Size = utility:Size(1, -2, 1, -2, colorpicker_open_transparency_inline),
                                     Position = utility:Position(0, 1, 0, 1, colorpicker_open_transparency_inline),
-                                    Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                                    BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                                 }, colorpicker.holder.drawings);colorpicker.holder.transparencybg = colorpicker_open_transparency_bg
                                 --
                                 local colorpicker_open_transparency_image = utility:Create("Image", {Vector2.new(1,1), colorpicker_open_transparency_inline}, {
@@ -1713,19 +1713,19 @@ do
                                 local colorpicker_open_transparency_cursor_outline = utility:Create("Frame", {Vector2.new((colorpicker_open_transparency_image.Size.X*(1-colorpicker.current[4]))-3,-3), colorpicker_open_transparency_image}, {
                                     Size = utility:Size(0, 6, 1, 6, colorpicker_open_transparency_image),
                                     Position = utility:Position(1-colorpicker.current[4], -3, 0, -3, colorpicker_open_transparency_image),
-                                    Color = theme.outline
+                                    BackgroundColor3 = theme.outline
                                 }, colorpicker.holder.drawings);colorpicker.holder.transparency_cursor[1] = colorpicker_open_transparency_cursor_outline
                                 --
                                 local colorpicker_open_transparency_cursor_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_cursor_outline}, {
                                     Size = utility:Size(1, -2, 1, -2, colorpicker_open_transparency_cursor_outline),
                                     Position = utility:Position(0, 1, 0, 1, colorpicker_open_transparency_cursor_outline),
-                                    Color = theme.textcolor
+                                    BackgroundColor3 = theme.textcolor
                                 }, colorpicker.holder.drawings);colorpicker.holder.transparency_cursor[2] = colorpicker_open_transparency_cursor_inline
                                 --
-                                local colorpicker_open_transparency_cursor_color = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_cursor_inline}, {
+                                local colorpicker_open_transparency_cursor_BackgroundColor3 = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_cursor_inline}, {
                                     Size = utility:Size(1, -2, 1, -2, colorpicker_open_transparency_cursor_inline),
                                     Position = utility:Position(0, 1, 0, 1, colorpicker_open_transparency_cursor_inline),
-                                    Color = Color3.fromHSV(0, 0, 1 - colorpicker.current[4]),
+                                    BackgroundColor3 = Color3.fromHSV(0, 0, 1 - colorpicker.current[4]),
                                 }, colorpicker.holder.drawings);colorpicker.holder.transparency_cursor[3] = colorpicker_open_transparency_cursor_color
                                 --
                                 utility:LoadImage(colorpicker_open_transparency_image, "transp", "https://i.imgur.com/ncssKbH.png")
@@ -1845,21 +1845,21 @@ do
             local keybind_outline = utility:Create("Frame", {Vector2.new(section.section_frame.Size.X-(40+4),keybind.axis), section.section_frame}, {
                 Size = utility:Size(0, 40, 0, 17),
                 Position = utility:Position(1, -(40+4), 0, keybind.axis, section.section_frame),
-                Color = theme.outline,
+                BackgroundColor3 = theme.outline,
                 Visible = page.open
             }, section.visibleContent)
             --
             local keybind_inline = utility:Create("Frame", {Vector2.new(1,1), keybind_outline}, {
                 Size = utility:Size(1, -2, 1, -2, keybind_outline),
                 Position = utility:Position(0, 1, 0, 1, keybind_outline),
-                Color = theme.inline,
+                BackgroundColor3 = theme.inline,
                 Visible = page.open
             }, section.visibleContent)
             --
             local keybind_frame = utility:Create("Frame", {Vector2.new(1,1), keybind_inline}, {
                 Size = utility:Size(1, -2, 1, -2, keybind_inline),
                 Position = utility:Position(0, 1, 0, 1, keybind_inline),
-                Color = theme.light_contrast,
+                BackgroundColor3 = theme.light_contrast,
                 Visible = page.open
             }, section.visibleContent)
             --
@@ -1874,8 +1874,8 @@ do
                 Text = "...",
                 Size = theme.textsize,
                 Font = theme.font,
-                Color = theme.textcolor,
-                OutlineColor = theme.textborder, 
+                BackgroundColor3 = theme.textcolor,
+                OutlineBackgroundColor3 = theme.textborder, 
                 Center = true,
                 Position = utility:Position(0.5, 0, 1, 0, keybind_outline),
                 Visible = page.open
@@ -1925,7 +1925,7 @@ do
             --
             function keybind:Reset()
                 for i,v in pairs(keybind.modemenu.buttons) do
-                    v.Color = v.Text == keybind.mode and theme.accent or theme.textcolor
+                    v.BackgroundColor3 = v.Text == keybind.mode and theme.accent or theme.textcolor
                 end
                 --
                 keybind.active = keybind.mode == "Always" and true or false
@@ -1958,7 +1958,7 @@ do
                     if done then
                         keybind.selecting = false
                         keybind.active = keybind.mode == "Always" and true or false
-                        keybind_frame.Color = theme.light_contrast
+                        keybind_frame.BackgroundColor3 = theme.light_contrast
                         --
                         window.keybindslist:Remove(keybindname or name)
                         callback(Enum[keybind.current[1]][keybind.current[2]], keybind.active)
@@ -1967,13 +1967,13 @@ do
                 --
                 if not window.isVisible and keybind.selecting then
                     keybind.selecting = false
-                    keybind_frame.Color = theme.light_contrast
+                    keybind_frame.BackgroundColor3 = theme.light_contrast
                 end
                 --
                 if Input.UserInputType == Enum.UserInputType.MouseButton1 and window.isVisible and keybind_outline.Visible then
                     if utility:MouseOverDrawing({section.section_frame.Position.X + (section.section_frame.Size.X - (40+4+2)), section.section_frame.Position.Y + keybind.axis, section.section_frame.Position.X + section.section_frame.Size.X, section.section_frame.Position.Y + keybind.axis + 17}) and not window:IsOverContent() and not keybind.selecting then
                         keybind.selecting = true
-                        keybind_frame.Color = theme.dark_contrast
+                        keybind_frame.BackgroundColor3 = theme.dark_contrast
                     end
                     if keybind.open and keybind.modemenu.frame then
                         if utility:MouseOverDrawing({keybind.modemenu.frame.Position.X, keybind.modemenu.frame.Position.Y, keybind.modemenu.frame.Position.X + keybind.modemenu.frame.Size.X, keybind.modemenu.frame.Position.Y + keybind.modemenu.frame.Size.Y}) then
@@ -2012,21 +2012,21 @@ do
                         local modemenu = utility:Create("Frame", {Vector2.new(keybind_outline.Size.X + 2,0), keybind_outline}, {
                             Size = utility:Size(0, 64, 0, 49),
                             Position = utility:Position(1, 2, 0, 0, keybind_outline),
-                            Color = theme.outline,
+                            BackgroundColor3 = theme.outline,
                             Visible = page.open
                         }, keybind.modemenu.drawings);keybind.modemenu.frame = modemenu
                         --
                         local modemenu_inline = utility:Create("Frame", {Vector2.new(1,1), modemenu}, {
                             Size = utility:Size(1, -2, 1, -2, modemenu),
                             Position = utility:Position(0, 1, 0, 1, modemenu),
-                            Color = theme.inline,
+                            BackgroundColor3 = theme.inline,
                             Visible = page.open
                         }, keybind.modemenu.drawings)
                         --
                         local modemenu_frame = utility:Create("Frame", {Vector2.new(1,1), modemenu_inline}, {
                             Size = utility:Size(1, -2, 1, -2, modemenu_inline),
                             Position = utility:Position(0, 1, 0, 1, modemenu_inline),
-                            Color = theme.light_contrast,
+                            BackgroundColor3 = theme.light_contrast,
                             Visible = page.open
                         }, keybind.modemenu.drawings)
                         --
@@ -2044,9 +2044,9 @@ do
                                 Text = v,
                                 Size = theme.textsize,
                                 Font = theme.font,
-                                Color = v == keybind.mode and theme.accent or theme.textcolor,
+                                BackgroundColor3 = v == keybind.mode and theme.accent or theme.textcolor,
                                 Center = true,
-                                OutlineColor = theme.textborder,
+                                OutlineBackgroundColor3 = theme.textborder,
                                 Position = utility:Position(0.5, 0, 0, 15 * (i-1), modemenu_frame),
                                 Visible = page.open
                             }, keybind.modemenu.drawings);keybind.modemenu.buttons[#keybind.modemenu.buttons + 1] = button_title
@@ -2106,8 +2106,8 @@ do
             Text = name,
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
-            OutlineColor = theme.textborder,
+            BackgroundColor3 = theme.textcolor,
+            OutlineBackgroundColor3 = theme.textborder,
             Position = utility:Position(0, 4, 0, slider.axis, section.section_frame),
             Visible = page.open
         }, section.visibleContent)
@@ -2115,28 +2115,28 @@ do
         local slider_outline = utility:Create("Frame", {Vector2.new(4,slider.axis + 15), section.section_frame}, {
             Size = utility:Size(1, -8, 0, 12, section.section_frame),
             Position = utility:Position(0, 4, 0, slider.axis + 15, section.section_frame),
-            Color = theme.outline,
+            BackgroundColor3 = theme.outline,
             Visible = page.open
         }, section.visibleContent)
         --
         local slider_inline = utility:Create("Frame", {Vector2.new(1,1), slider_outline}, {
             Size = utility:Size(1, -2, 1, -2, slider_outline),
             Position = utility:Position(0, 1, 0, 1, slider_outline),
-            Color = theme.inline,
+            BackgroundColor3 = theme.inline,
             Visible = page.open
         }, section.visibleContent)
         --
         local slider_frame = utility:Create("Frame", {Vector2.new(1,1), slider_inline}, {
             Size = utility:Size(1, -2, 1, -2, slider_inline),
             Position = utility:Position(0, 1, 0, 1, slider_inline),
-            Color = theme.light_contrast,
+            BackgroundColor3 = theme.light_contrast,
             Visible = page.open
         }, section.visibleContent)
         --
         local slider_slide = utility:Create("Frame", {Vector2.new(1,1), slider_inline}, {
             Size = utility:Size(0, (slider_frame.Size.X / (slider.max - slider.min) * (slider.current - slider.min)), 1, -2, slider_inline),
             Position = utility:Position(0, 1, 0, 1, slider_inline),
-            Color = theme.accent,
+            BackgroundColor3 = theme.accent,
             Visible = page.open
         }, section.visibleContent)
         --
@@ -2152,9 +2152,9 @@ do
             Text = slider.current..slider.sub.."/"..slider.max..slider.sub,
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
+            BackgroundColor3 = theme.textcolor,
             Center = true,
-            OutlineColor = theme.textborder,
+            OutlineBackgroundColor3 = theme.textborder,
             Position = utility:Position(0.5, 0, 0, (slider_outline.Size.Y/2) - (textBounds.Y/2), slider_outline),
             Visible = page.open
         }, section.visibleContent)
@@ -2227,21 +2227,21 @@ do
         local button_outline = utility:Create("Frame", {Vector2.new(4,button.axis), section.section_frame}, {
             Size = utility:Size(1, -8, 0, 20, section.section_frame),
             Position = utility:Position(0, 4, 0, button.axis, section.section_frame),
-            Color = theme.outline,
+            BackgroundColor3 = theme.outline,
             Visible = page.open
         }, section.visibleContent)
         --
         local button_inline = utility:Create("Frame", {Vector2.new(1,1), button_outline}, {
             Size = utility:Size(1, -2, 1, -2, button_outline),
             Position = utility:Position(0, 1, 0, 1, button_outline),
-            Color = theme.inline,
+            BackgroundColor3 = theme.inline,
             Visible = page.open
         }, section.visibleContent)
         --
         local button_frame = utility:Create("Frame", {Vector2.new(1,1), button_inline}, {
             Size = utility:Size(1, -2, 1, -2, button_inline),
             Position = utility:Position(0, 1, 0, 1, button_inline),
-            Color = theme.light_contrast,
+            BackgroundColor3 = theme.light_contrast,
             Visible = page.open
         }, section.visibleContent)
         --
@@ -2256,8 +2256,8 @@ do
             Text = name,
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
-            OutlineColor = theme.textborder,
+            BackgroundColor3 = theme.textcolor,
+            OutlineBackgroundColor3 = theme.textborder,
             Center = true,
             Position = utility:Position(0.5, 0, 0, 1, button_frame),
             Visible = page.open
@@ -2297,21 +2297,21 @@ do
             local button_outline = utility:Create("Frame", {Vector2.new(i == 2 and ((section.section_frame.Size.X / 2) + 2) or 4,button.axis), section.section_frame}, {
                 Size = utility:Size(0.5, -6, 0, 20, section.section_frame),
                 Position = utility:Position(0, i == 2 and 2 or 4, 0, button.axis, section.section_frame),
-                Color = theme.outline,
+                BackgroundColor3 = theme.outline,
                 Visible = page.open
             }, section.visibleContent)
             --
             local button_inline = utility:Create("Frame", {Vector2.new(1,1), button_outline}, {
                 Size = utility:Size(1, -2, 1, -2, button_outline),
                 Position = utility:Position(0, 1, 0, 1, button_outline),
-                Color = theme.inline,
+                BackgroundColor3 = theme.inline,
                 Visible = page.open
             }, section.visibleContent)
             --
             local button_frame = utility:Create("Frame", {Vector2.new(1,1), button_inline}, {
                 Size = utility:Size(1, -2, 1, -2, button_inline),
                 Position = utility:Position(0, 1, 0, 1, button_inline),
-                Color = theme.light_contrast,
+                BackgroundColor3 = theme.light_contrast,
                 Visible = page.open
             }, section.visibleContent)
             --
@@ -2326,8 +2326,8 @@ do
                 Text = buttons[i][1],
                 Size = theme.textsize,
                 Font = theme.font,
-                Color = theme.textcolor,
-                OutlineColor = theme.textborder,
+                BackgroundColor3 = theme.textcolor,
+                OutlineBackgroundColor3 = theme.textborder,
                 Center = true,
                 Position = utility:Position(0.5, 0, 0, 1, button_frame),
                 Visible = page.open
@@ -2363,21 +2363,21 @@ do
         local dropdown_outline = utility:Create("Frame", {Vector2.new(4,dropdown.axis + 15), section.section_frame}, {
             Size = utility:Size(1, -8, 0, 20, section.section_frame),
             Position = utility:Position(0, 4, 0, dropdown.axis + 15, section.section_frame),
-            Color = theme.outline,
+            BackgroundColor3 = theme.outline,
             Visible = page.open
         }, section.visibleContent)
         --
         local dropdown_inline = utility:Create("Frame", {Vector2.new(1,1), dropdown_outline}, {
             Size = utility:Size(1, -2, 1, -2, dropdown_outline),
             Position = utility:Position(0, 1, 0, 1, dropdown_outline),
-            Color = theme.inline,
+            BackgroundColor3 = theme.inline,
             Visible = page.open
         }, section.visibleContent)
         --
         local dropdown_frame = utility:Create("Frame", {Vector2.new(1,1), dropdown_inline}, {
             Size = utility:Size(1, -2, 1, -2, dropdown_inline),
             Position = utility:Position(0, 1, 0, 1, dropdown_inline),
-            Color = theme.light_contrast,
+            BackgroundColor3 = theme.light_contrast,
             Visible = page.open
         }, section.visibleContent)
         --
@@ -2385,8 +2385,8 @@ do
             Text = name,
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
-            OutlineColor = theme.textborder,
+            BackgroundColor3 = theme.textcolor,
+            OutlineBackgroundColor3 = theme.textborder,
             Position = utility:Position(0, 4, 0, dropdown.axis, section.section_frame),
             Visible = page.open
         }, section.visibleContent)
@@ -2402,8 +2402,8 @@ do
             Text = dropdown.current,
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
-            OutlineColor = theme.textborder,
+            BackgroundColor3 = theme.textcolor,
+            OutlineBackgroundColor3 = theme.textborder,
             Position = utility:Position(0, 3, 0, (dropdown_frame.Size.Y/2) - 7, dropdown_frame),
             Visible = page.open
         }, section.visibleContent)
@@ -2420,7 +2420,7 @@ do
         function dropdown:Update()
             if dropdown.open and dropdown.holder.inline then
                 for i,v in pairs(dropdown.holder.buttons) do
-                    v[1].Color = v[1].Text == tostring(dropdown.current) and theme.accent or theme.textcolor
+                    v[1].BackgroundColor3 = v[1].Text == tostring(dropdown.current) and theme.accent or theme.textcolor
                     v[1].Position = utility:Position(0, v[1].Text == tostring(dropdown.current) and 8 or 6, 0, 2, v[2])
                     utility:UpdateOffset(v[1], {Vector2.new(v[1].Text == tostring(dropdown.current) and 8 or 6, 2), v[2]})
                 end
@@ -2457,14 +2457,14 @@ do
                         local dropdown_open_outline = utility:Create("Frame", {Vector2.new(0,19), dropdown_outline}, {
                             Size = utility:Size(1, 0, 0, 3 + (#options * 19), dropdown_outline),
                             Position = utility:Position(0, 0, 0, 19, dropdown_outline),
-                            Color = theme.outline,
+                            BackgroundColor3 = theme.outline,
                             Visible = page.open
                         }, dropdown.holder.drawings);dropdown.holder.outline = dropdown_open_outline
                         --
                         local dropdown_open_inline = utility:Create("Frame", {Vector2.new(1,1), dropdown_open_outline}, {
                             Size = utility:Size(1, -2, 1, -2, dropdown_open_outline),
                             Position = utility:Position(0, 1, 0, 1, dropdown_open_outline),
-                            Color = theme.inline,
+                            BackgroundColor3 = theme.inline,
                             Visible = page.open
                         }, dropdown.holder.drawings);dropdown.holder.inline = dropdown_open_inline
                         --
@@ -2472,7 +2472,7 @@ do
                             local dropdown_value_frame = utility:Create("Frame", {Vector2.new(1,1 + (19 * (i-1))), dropdown_open_inline}, {
                                 Size = utility:Size(1, -2, 0, 18, dropdown_open_inline),
                                 Position = utility:Position(0, 1, 0, 1 + (19 * (i-1)), dropdown_open_inline),
-                                Color = theme.light_contrast,
+                                BackgroundColor3 = theme.light_contrast,
                                 Visible = page.open
                             }, dropdown.holder.drawings)
                             --[[
@@ -2489,8 +2489,8 @@ do
                                 Text = v,
                                 Size = theme.textsize,
                                 Font = theme.font,
-                                Color = v == tostring(dropdown.current) and theme.accent or theme.textcolor,
-                                OutlineColor = theme.textborder,
+                                BackgroundColor3 = v == tostring(dropdown.current) and theme.accent or theme.textcolor,
+                                OutlineBackgroundColor3 = theme.textborder,
                                 Position = utility:Position(0, v == tostring(dropdown.current) and 8 or 6, 0, 2, dropdown_value_frame),
                                 Visible = page.open
                             }, dropdown.holder.drawings);dropdown.holder.buttons[#dropdown.holder.buttons + 1] = {dropdown_value, dropdown_value_frame}
@@ -2575,21 +2575,21 @@ do
         local multibox_outline = utility:Create("Frame", {Vector2.new(4,multibox.axis + 15), section.section_frame}, {
             Size = utility:Size(1, -8, 0, 20, section.section_frame),
             Position = utility:Position(0, 4, 0, multibox.axis + 15, section.section_frame),
-            Color = theme.outline,
+            BackgroundColor3 = theme.outline,
             Visible = page.open
         }, section.visibleContent)
         --
         local multibox_inline = utility:Create("Frame", {Vector2.new(1,1), multibox_outline}, {
             Size = utility:Size(1, -2, 1, -2, multibox_outline),
             Position = utility:Position(0, 1, 0, 1, multibox_outline),
-            Color = theme.inline,
+            BackgroundColor3 = theme.inline,
             Visible = page.open
         }, section.visibleContent)
         --
         local multibox_frame = utility:Create("Frame", {Vector2.new(1,1), multibox_inline}, {
             Size = utility:Size(1, -2, 1, -2, multibox_inline),
             Position = utility:Position(0, 1, 0, 1, multibox_inline),
-            Color = theme.light_contrast,
+            BackgroundColor3 = theme.light_contrast,
             Visible = page.open
         }, section.visibleContent)
         --
@@ -2597,8 +2597,8 @@ do
             Text = name,
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
-            OutlineColor = theme.textborder,
+            BackgroundColor3 = theme.textcolor,
+            OutlineBackgroundColor3 = theme.textborder,
             Position = utility:Position(0, 4, 0, multibox.axis, section.section_frame),
             Visible = page.open
         }, section.visibleContent)
@@ -2614,8 +2614,8 @@ do
             Text = "",
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
-            OutlineColor = theme.textborder,
+            BackgroundColor3 = theme.textcolor,
+            OutlineBackgroundColor3 = theme.textborder,
             Position = utility:Position(0, 3, 0, (multibox_frame.Size.Y/2) - 7, multibox_frame),
             Visible = page.open
         }, section.visibleContent)
@@ -2632,7 +2632,7 @@ do
         function multibox:Update()
             if multibox.open and multibox.holder.inline then
                 for i,v in pairs(multibox.holder.buttons) do
-                    v[1].Color = table.find(multibox.current, v[1].Text) and theme.accent or theme.textcolor
+                    v[1].BackgroundColor3 = table.find(multibox.current, v[1].Text) and theme.accent or theme.textcolor
                     v[1].Position = utility:Position(0, table.find(multibox.current, v[1].Text) and 8 or 6, 0, 2, v[2])
                     utility:UpdateOffset(v[1], {Vector2.new(table.find(multibox.current, v[1].Text) and 8 or 6, 2), v[2]})
                 end
@@ -2701,14 +2701,14 @@ do
                         local multibox_open_outline = utility:Create("Frame", {Vector2.new(0,19), multibox_outline}, {
                             Size = utility:Size(1, 0, 0, 3 + (#options * 19), multibox_outline),
                             Position = utility:Position(0, 0, 0, 19, multibox_outline),
-                            Color = theme.outline,
+                            BackgroundColor3 = theme.outline,
                             Visible = page.open
                         }, multibox.holder.drawings);multibox.holder.outline = multibox_open_outline
                         --
                         local multibox_open_inline = utility:Create("Frame", {Vector2.new(1,1), multibox_open_outline}, {
                             Size = utility:Size(1, -2, 1, -2, multibox_open_outline),
                             Position = utility:Position(0, 1, 0, 1, multibox_open_outline),
-                            Color = theme.inline,
+                            BackgroundColor3 = theme.inline,
                             Visible = page.open
                         }, multibox.holder.drawings);multibox.holder.inline = multibox_open_inline
                         --
@@ -2716,7 +2716,7 @@ do
                             local multibox_value_frame = utility:Create("Frame", {Vector2.new(1,1 + (19 * (i-1))), multibox_open_inline}, {
                                 Size = utility:Size(1, -2, 0, 18, multibox_open_inline),
                                 Position = utility:Position(0, 1, 0, 1 + (19 * (i-1)), multibox_open_inline),
-                                Color = theme.light_contrast,
+                                BackgroundColor3 = theme.light_contrast,
                                 Visible = page.open
                             }, multibox.holder.drawings)
                             --[[
@@ -2733,8 +2733,8 @@ do
                                 Text = v,
                                 Size = theme.textsize,
                                 Font = theme.font,
-                                Color = table.find(multibox.current, v) and theme.accent or theme.textcolor,
-                                OutlineColor = theme.textborder,
+                                BackgroundColor3 = table.find(multibox.current, v) and theme.accent or theme.textcolor,
+                                OutlineBackgroundColor3 = theme.textborder,
                                 Position = utility:Position(0, table.find(multibox.current, v) and 8 or 6, 0, 2, multibox_value_frame),
                                 Visible = page.open
                             }, multibox.holder.drawings);multibox.holder.buttons[#multibox.holder.buttons + 1] = {multibox_value, multibox_value_frame}
@@ -2823,21 +2823,21 @@ do
         local keybind_outline = utility:Create("Frame", {Vector2.new(section.section_frame.Size.X-(40+4),keybind.axis), section.section_frame}, {
             Size = utility:Size(0, 40, 0, 17),
             Position = utility:Position(1, -(40+4), 0, keybind.axis, section.section_frame),
-            Color = theme.outline,
+            BackgroundColor3 = theme.outline,
             Visible = page.open
         }, section.visibleContent)
         --
         local keybind_inline = utility:Create("Frame", {Vector2.new(1,1), keybind_outline}, {
             Size = utility:Size(1, -2, 1, -2, keybind_outline),
             Position = utility:Position(0, 1, 0, 1, keybind_outline),
-            Color = theme.inline,
+            BackgroundColor3 = theme.inline,
             Visible = page.open
         }, section.visibleContent)
         --
         local keybind_frame = utility:Create("Frame", {Vector2.new(1,1), keybind_inline}, {
             Size = utility:Size(1, -2, 1, -2, keybind_inline),
             Position = utility:Position(0, 1, 0, 1, keybind_inline),
-            Color = theme.light_contrast,
+            BackgroundColor3 = theme.light_contrast,
             Visible = page.open
         }, section.visibleContent)
         --
@@ -2845,8 +2845,8 @@ do
             Text = name,
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
-            OutlineColor = theme.textborder,
+            BackgroundColor3 = theme.textcolor,
+            OutlineBackgroundColor3 = theme.textborder,
             Position = utility:Position(0, 4, 0, keybind.axis + (17/2) - (utility:GetTextBounds(name, theme.textsize, theme.font).Y/2), section.section_frame),
             Visible = page.open
         }, section.visibleContent)
@@ -2862,8 +2862,8 @@ do
             Text = "...",
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
-            OutlineColor = theme.textborder, 
+            BackgroundColor3 = theme.textcolor,
+            OutlineBackgroundColor3 = theme.textborder, 
             Center = true,
             Position = utility:Position(0.5, 0, 1, 0, keybind_outline),
             Visible = page.open
@@ -2908,7 +2908,7 @@ do
         --
         function keybind:Reset()
             for i,v in pairs(keybind.modemenu.buttons) do
-                v.Color = v.Text == keybind.mode and theme.accent or theme.textcolor
+                v.BackgroundColor3 = v.Text == keybind.mode and theme.accent or theme.textcolor
             end
             --
             keybind.active = keybind.mode == "Always" and true or false
@@ -2939,7 +2939,7 @@ do
                 if done then
                     keybind.selecting = false
                     keybind.active = keybind.mode == "Always" and true or false
-                    keybind_frame.Color = theme.light_contrast
+                    keybind_frame.BackgroundColor3 = theme.light_contrast
                     --
                     window.keybindslist:Remove(keybindname or name)
                     --
@@ -2949,13 +2949,13 @@ do
             --
             if not window.isVisible and keybind.selecting then
                 keybind.selecting = false
-                keybind_frame.Color = theme.light_contrast
+                keybind_frame.BackgroundColor3 = theme.light_contrast
             end
             --
             if Input.UserInputType == Enum.UserInputType.MouseButton1 and window.isVisible and keybind_outline.Visible then
                 if utility:MouseOverDrawing({section.section_frame.Position.X, section.section_frame.Position.Y + keybind.axis, section.section_frame.Position.X + section.section_frame.Size.X, section.section_frame.Position.Y + keybind.axis + 17}) and not window:IsOverContent() and not keybind.selecting then
                     keybind.selecting = true
-                    keybind_frame.Color = theme.dark_contrast
+                    keybind_frame.BackgroundColor3 = theme.dark_contrast
                 end
                 if keybind.open and keybind.modemenu.frame then
                     if utility:MouseOverDrawing({keybind.modemenu.frame.Position.X, keybind.modemenu.frame.Position.Y, keybind.modemenu.frame.Position.X + keybind.modemenu.frame.Size.X, keybind.modemenu.frame.Position.Y + keybind.modemenu.frame.Size.Y}) then
@@ -2994,21 +2994,21 @@ do
                     local modemenu = utility:Create("Frame", {Vector2.new(keybind_outline.Size.X + 2,0), keybind_outline}, {
                         Size = utility:Size(0, 64, 0, 49),
                         Position = utility:Position(1, 2, 0, 0, keybind_outline),
-                        Color = theme.outline,
+                        BackgroundColor3 = theme.outline,
                         Visible = page.open
                     }, keybind.modemenu.drawings);keybind.modemenu.frame = modemenu
                     --
                     local modemenu_inline = utility:Create("Frame", {Vector2.new(1,1), modemenu}, {
                         Size = utility:Size(1, -2, 1, -2, modemenu),
                         Position = utility:Position(0, 1, 0, 1, modemenu),
-                        Color = theme.inline,
+                        BackgroundColor3 = theme.inline,
                         Visible = page.open
                     }, keybind.modemenu.drawings)
                     --
                     local modemenu_frame = utility:Create("Frame", {Vector2.new(1,1), modemenu_inline}, {
                         Size = utility:Size(1, -2, 1, -2, modemenu_inline),
                         Position = utility:Position(0, 1, 0, 1, modemenu_inline),
-                        Color = theme.light_contrast,
+                        BackgroundColor3 = theme.light_contrast,
                         Visible = page.open
                     }, keybind.modemenu.drawings)
                     --
@@ -3026,9 +3026,9 @@ do
                             Text = v,
                             Size = theme.textsize,
                             Font = theme.font,
-                            Color = v == keybind.mode and theme.accent or theme.textcolor,
+                            BackgroundColor3 = v == keybind.mode and theme.accent or theme.textcolor,
                             Center = true,
-                            OutlineColor = theme.textborder,
+                            OutlineBackgroundColor3 = theme.textborder,
                             Position = utility:Position(0.5, 0, 0, 15 * (i-1), modemenu_frame),
                             Visible = page.open
                         }, keybind.modemenu.drawings);keybind.modemenu.buttons[#keybind.modemenu.buttons + 1] = button_title
@@ -3081,14 +3081,14 @@ do
         local colorpicker_outline = utility:Create("Frame", {Vector2.new(section.section_frame.Size.X-(30+4),colorpicker.axis), section.section_frame}, {
             Size = utility:Size(0, 30, 0, 15),
             Position = utility:Position(1, -(30+4), 0, colorpicker.axis, section.section_frame),
-            Color = theme.outline,
+            BackgroundColor3 = theme.outline,
             Visible = page.open
         }, section.visibleContent)
         --
         local colorpicker_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_outline}, {
             Size = utility:Size(1, -2, 1, -2, colorpicker_outline),
             Position = utility:Position(0, 1, 0, 1, colorpicker_outline),
-            Color = theme.inline,
+            BackgroundColor3 = theme.inline,
             Visible = page.open
         }, section.visibleContent)
         --
@@ -3104,7 +3104,7 @@ do
         local colorpicker_frame = utility:Create("Frame", {Vector2.new(1,1), colorpicker_inline}, {
             Size = utility:Size(1, -2, 1, -2, colorpicker_inline),
             Position = utility:Position(0, 1, 0, 1, colorpicker_inline),
-            Color = def,
+            BackgroundColor3 = def,
             Transparency = transp and (1 - transp) or 1,
             Visible = page.open
         }, section.visibleContent)
@@ -3120,8 +3120,8 @@ do
             Text = name,
             Size = theme.textsize,
             Font = theme.font,
-            Color = theme.textcolor,
-            OutlineColor = theme.textborder,
+            BackgroundColor3 = theme.textcolor,
+            OutlineBackgroundColor3 = theme.textborder,
             Position = utility:Position(0, 4, 0, colorpicker.axis + (15/2) - (utility:GetTextBounds(name, theme.textsize, theme.font).Y/2), section.section_frame),
             Visible = page.open
         }, section.visibleContent)
@@ -3134,13 +3134,13 @@ do
         function colorpicker:Set(color, transp_val)
             if typeof(color) == "table" then
                 colorpicker.current = color
-                colorpicker_frame.Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                colorpicker_frame.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                 colorpicker_frame.Transparency = 1 - colorpicker.current[4]
                 callback(Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3]), colorpicker.current[4])
             elseif typeof(color) == "color3" then
                 local h, s, v = color:ToHSV()
                 colorpicker.current = {h, s, v, (transp_val or 0)}
-                colorpicker_frame.Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                colorpicker_frame.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                 colorpicker_frame.Transparency = 1 - colorpicker.current[4]
                 callback(Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3]), colorpicker.current[4]) 
             end
@@ -3158,7 +3158,7 @@ do
                 utility:UpdateOffset(colorpicker.holder.picker_cursor, {Vector2.new((colorpicker.holder.picker.Size.X*colorpicker.current[2])-3,(colorpicker.holder.picker.Size.Y*(1-colorpicker.current[3]))-3), colorpicker.holder.picker})
                 --
                 if colorpicker.holder.transparencybg then
-                    colorpicker.holder.transparencybg.Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                    colorpicker.holder.transparencybg.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                 end
             elseif colorpicker.open and colorpicker.holder.huepicker and colorpicker.holding.huepicker then
                 colorpicker.current[1] = (math.clamp(mouseLocation.Y - colorpicker.holder.huepicker.Position.Y, 0, colorpicker.holder.huepicker.Size.Y) / colorpicker.holder.huepicker.Size.Y)
@@ -3166,18 +3166,18 @@ do
                 colorpicker.holder.huepicker_cursor[1].Position = utility:Position(0, -3, colorpicker.current[1], -3, colorpicker.holder.huepicker)
                 colorpicker.holder.huepicker_cursor[2].Position = utility:Position(0, 1, 0, 1, colorpicker.holder.huepicker_cursor[1])
                 colorpicker.holder.huepicker_cursor[3].Position = utility:Position(0, 1, 0, 1, colorpicker.holder.huepicker_cursor[2])
-                colorpicker.holder.huepicker_cursor[3].Color = Color3.fromHSV(colorpicker.current[1], 1, 1)
+                colorpicker.holder.huepicker_cursor[3].BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], 1, 1)
                 --
                 utility:UpdateOffset(colorpicker.holder.huepicker_cursor[1], {Vector2.new(-3,(colorpicker.holder.huepicker.Size.Y*colorpicker.current[1])-3), colorpicker.holder.huepicker})
                 --
-                colorpicker.holder.background.Color = Color3.fromHSV(colorpicker.current[1], 1, 1)
+                colorpicker.holder.background.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], 1, 1)
                 --
                 if colorpicker.holder.transparency_cursor and colorpicker.holder.transparency_cursor[3] then
-                    colorpicker.holder.transparency_cursor[3].Color = Color3.fromHSV(0, 0, 1 - colorpicker.current[4])
+                    colorpicker.holder.transparency_cursor[3].BackgroundColor3 = Color3.fromHSV(0, 0, 1 - colorpicker.current[4])
                 end
                 --
                 if colorpicker.holder.transparencybg then
-                    colorpicker.holder.transparencybg.Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                    colorpicker.holder.transparencybg.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                 end
             elseif colorpicker.open and colorpicker.holder.transparency and colorpicker.holding.transparency then
                 colorpicker.current[4] = 1 - (math.clamp(mouseLocation.X - colorpicker.holder.transparency.Position.X, 0, colorpicker.holder.transparency.Size.X) / colorpicker.holder.transparency.Size.X)
@@ -3185,13 +3185,13 @@ do
                 colorpicker.holder.transparency_cursor[1].Position = utility:Position(1-colorpicker.current[4], -3, 0, -3, colorpicker.holder.transparency)
                 colorpicker.holder.transparency_cursor[2].Position = utility:Position(0, 1, 0, 1, colorpicker.holder.transparency_cursor[1])
                 colorpicker.holder.transparency_cursor[3].Position = utility:Position(0, 1, 0, 1, colorpicker.holder.transparency_cursor[2])
-                colorpicker.holder.transparency_cursor[3].Color = Color3.fromHSV(0, 0, 1 - colorpicker.current[4])
+                colorpicker.holder.transparency_cursor[3].BackgroundColor3 = Color3.fromHSV(0, 0, 1 - colorpicker.current[4])
                 colorpicker_frame.Transparency = (1 - colorpicker.current[4])
                 --
                 utility:UpdateTransparency(colorpicker_frame, (1 - colorpicker.current[4]))
                 utility:UpdateOffset(colorpicker.holder.transparency_cursor[1], {Vector2.new((colorpicker.holder.transparency.Size.X*(1-colorpicker.current[4]))-3,-3), colorpicker.holder.transparency})
                 --
-                colorpicker.holder.background.Color = Color3.fromHSV(colorpicker.current[1], 1, 1)
+                colorpicker.holder.background.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], 1, 1)
             end
             --
             colorpicker:Set(colorpicker.current)
@@ -3222,52 +3222,52 @@ do
                         local colorpicker_open_outline = utility:Create("Frame", {Vector2.new(4,colorpicker.axis + 19), section.section_frame}, {
                             Size = utility:Size(1, -8, 0, transp and 219 or 200, section.section_frame),
                             Position = utility:Position(0, 4, 0, colorpicker.axis + 19, section.section_frame),
-                            Color = theme.outline
+                            BackgroundColor3 = theme.outline
                         }, colorpicker.holder.drawings);colorpicker.holder.inline = colorpicker_open_outline
                         --
                         local colorpicker_open_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_outline}, {
                             Size = utility:Size(1, -2, 1, -2, colorpicker_open_outline),
                             Position = utility:Position(0, 1, 0, 1, colorpicker_open_outline),
-                            Color = theme.inline
+                            BackgroundColor3 = theme.inline
                         }, colorpicker.holder.drawings)
                         --
                         local colorpicker_open_frame = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_inline}, {
                             Size = utility:Size(1, -2, 1, -2, colorpicker_open_inline),
                             Position = utility:Position(0, 1, 0, 1, colorpicker_open_inline),
-                            Color = theme.dark_contrast
+                            BackgroundColor3 = theme.dark_contrast
                         }, colorpicker.holder.drawings)
                         --
                         local colorpicker_open_accent = utility:Create("Frame", {Vector2.new(0,0), colorpicker_open_frame}, {
                             Size = utility:Size(1, 0, 0, 2, colorpicker_open_frame),
                             Position = utility:Position(0, 0, 0, 0, colorpicker_open_frame),
-                            Color = theme.accent
+                            BackgroundColor3 = theme.accent
                         }, colorpicker.holder.drawings)
                         --
                         local colorpicker_title = utility:Create("TextLabel", {Vector2.new(4,2), colorpicker_open_frame}, {
                             Text = cpinfo,
                             Size = theme.textsize,
                             Font = theme.font,
-                            Color = theme.textcolor,
-                            OutlineColor = theme.textborder,
+                            BackgroundColor3 = theme.textcolor,
+                            OutlineBackgroundColor3 = theme.textborder,
                             Position = utility:Position(0, 4, 0, 2, colorpicker_open_frame),
                         }, colorpicker.holder.drawings)
                         --
                         local colorpicker_open_picker_outline = utility:Create("Frame", {Vector2.new(4,17), colorpicker_open_frame}, {
                             Size = utility:Size(1, -27, 1, transp and -40 or -21, colorpicker_open_frame),
                             Position = utility:Position(0, 4, 0, 17, colorpicker_open_frame),
-                            Color = theme.outline
+                            BackgroundColor3 = theme.outline
                         }, colorpicker.holder.drawings)
                         --
                         local colorpicker_open_picker_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_picker_outline}, {
                             Size = utility:Size(1, -2, 1, -2, colorpicker_open_picker_outline),
                             Position = utility:Position(0, 1, 0, 1, colorpicker_open_picker_outline),
-                            Color = theme.inline
+                            BackgroundColor3 = theme.inline
                         }, colorpicker.holder.drawings)
                         --
                         local colorpicker_open_picker_bg = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_picker_inline}, {
                             Size = utility:Size(1, -2, 1, -2, colorpicker_open_picker_inline),
                             Position = utility:Position(0, 1, 0, 1, colorpicker_open_picker_inline),
-                            Color = Color3.fromHSV(colorpicker.current[1],1,1)
+                            BackgroundColor3 = Color3.fromHSV(colorpicker.current[1],1,1)
                         }, colorpicker.holder.drawings);colorpicker.holder.background = colorpicker_open_picker_bg
                         --
                         local colorpicker_open_picker_image = utility:Create("Image", {Vector2.new(0,0), colorpicker_open_picker_bg}, {
@@ -3283,13 +3283,13 @@ do
                         local colorpicker_open_huepicker_outline = utility:Create("Frame", {Vector2.new(colorpicker_open_frame.Size.X-19,17), colorpicker_open_frame}, {
                             Size = utility:Size(0, 15, 1, transp and -40 or -21, colorpicker_open_frame),
                             Position = utility:Position(1, -19, 0, 17, colorpicker_open_frame),
-                            Color = theme.outline
+                            BackgroundColor3 = theme.outline
                         }, colorpicker.holder.drawings)
                         --
                         local colorpicker_open_huepicker_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_huepicker_outline}, {
                             Size = utility:Size(1, -2, 1, -2, colorpicker_open_huepicker_outline),
                             Position = utility:Position(0, 1, 0, 1, colorpicker_open_huepicker_outline),
-                            Color = theme.inline
+                            BackgroundColor3 = theme.inline
                         }, colorpicker.holder.drawings)
                         --
                         local colorpicker_open_huepicker_image = utility:Create("Image", {Vector2.new(1,1), colorpicker_open_huepicker_inline}, {
@@ -3300,38 +3300,38 @@ do
                         local colorpicker_open_huepicker_cursor_outline = utility:Create("Frame", {Vector2.new(-3,(colorpicker_open_huepicker_image.Size.Y*colorpicker.current[1])-3), colorpicker_open_huepicker_image}, {
                             Size = utility:Size(1, 6, 0, 6, colorpicker_open_huepicker_image),
                             Position = utility:Position(0, -3, colorpicker.current[1], -3, colorpicker_open_huepicker_image),
-                            Color = theme.outline
+                            BackgroundColor3 = theme.outline
                         }, colorpicker.holder.drawings);colorpicker.holder.huepicker_cursor[1] = colorpicker_open_huepicker_cursor_outline
                         --
                         local colorpicker_open_huepicker_cursor_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_huepicker_cursor_outline}, {
                             Size = utility:Size(1, -2, 1, -2, colorpicker_open_huepicker_cursor_outline),
                             Position = utility:Position(0, 1, 0, 1, colorpicker_open_huepicker_cursor_outline),
-                            Color = theme.textcolor
+                            BackgroundColor3 = theme.textcolor
                         }, colorpicker.holder.drawings);colorpicker.holder.huepicker_cursor[2] = colorpicker_open_huepicker_cursor_inline
                         --
-                        local colorpicker_open_huepicker_cursor_color = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_huepicker_cursor_inline}, {
+                        local colorpicker_open_huepicker_cursor_BackgroundColor3 = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_huepicker_cursor_inline}, {
                             Size = utility:Size(1, -2, 1, -2, colorpicker_open_huepicker_cursor_inline),
                             Position = utility:Position(0, 1, 0, 1, colorpicker_open_huepicker_cursor_inline),
-                            Color = Color3.fromHSV(colorpicker.current[1], 1, 1)
+                            BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], 1, 1)
                         }, colorpicker.holder.drawings);colorpicker.holder.huepicker_cursor[3] = colorpicker_open_huepicker_cursor_color
                         --
                         if transp then
                             local colorpicker_open_transparency_outline = utility:Create("Frame", {Vector2.new(4,colorpicker_open_frame.Size.X-19), colorpicker_open_frame}, {
                                 Size = utility:Size(1, -27, 0, 15, colorpicker_open_frame),
                                 Position = utility:Position(0, 4, 1, -19, colorpicker_open_frame),
-                                Color = theme.outline
+                                BackgroundColor3 = theme.outline
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_transparency_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_outline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_transparency_outline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_transparency_outline),
-                                Color = theme.inline
+                                BackgroundColor3 = theme.inline
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_transparency_bg = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_inline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_transparency_inline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_transparency_inline),
-                                Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                                BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                             }, colorpicker.holder.drawings);colorpicker.holder.transparencybg = colorpicker_open_transparency_bg
                             --
                             local colorpicker_open_transparency_image = utility:Create("Image", {Vector2.new(1,1), colorpicker_open_transparency_inline}, {
@@ -3342,19 +3342,19 @@ do
                             local colorpicker_open_transparency_cursor_outline = utility:Create("Frame", {Vector2.new((colorpicker_open_transparency_image.Size.X*(1-colorpicker.current[4]))-3,-3), colorpicker_open_transparency_image}, {
                                 Size = utility:Size(0, 6, 1, 6, colorpicker_open_transparency_image),
                                 Position = utility:Position(1-colorpicker.current[4], -3, 0, -3, colorpicker_open_transparency_image),
-                                Color = theme.outline
+                                BackgroundColor3 = theme.outline
                             }, colorpicker.holder.drawings);colorpicker.holder.transparency_cursor[1] = colorpicker_open_transparency_cursor_outline
                             --
                             local colorpicker_open_transparency_cursor_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_cursor_outline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_transparency_cursor_outline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_transparency_cursor_outline),
-                                Color = theme.textcolor
+                                BackgroundColor3 = theme.textcolor
                             }, colorpicker.holder.drawings);colorpicker.holder.transparency_cursor[2] = colorpicker_open_transparency_cursor_inline
                             --
-                            local colorpicker_open_transparency_cursor_color = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_cursor_inline}, {
+                            local colorpicker_open_transparency_cursor_BackgroundColor3 = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_cursor_inline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_transparency_cursor_inline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_transparency_cursor_inline),
-                                Color = Color3.fromHSV(0, 0, 1 - colorpicker.current[4]),
+                                BackgroundColor3 = Color3.fromHSV(0, 0, 1 - colorpicker.current[4]),
                             }, colorpicker.holder.drawings);colorpicker.holder.transparency_cursor[3] = colorpicker_open_transparency_cursor_color
                             --
                             utility:LoadImage(colorpicker_open_transparency_image, "transp", "https://i.imgur.com/ncssKbH.png")
@@ -3468,14 +3468,14 @@ do
             local colorpicker_outline = utility:Create("Frame", {Vector2.new(section.section_frame.Size.X-(30+4),colorpicker.axis), section.section_frame}, {
                 Size = utility:Size(0, 30, 0, 15),
                 Position = utility:Position(1, -(30+4), 0, colorpicker.axis, section.section_frame),
-                Color = theme.outline,
+                BackgroundColor3 = theme.outline,
                 Visible = page.open
             }, section.visibleContent)
             --
             local colorpicker_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_outline}, {
                 Size = utility:Size(1, -2, 1, -2, colorpicker_outline),
                 Position = utility:Position(0, 1, 0, 1, colorpicker_outline),
-                Color = theme.inline,
+                BackgroundColor3 = theme.inline,
                 Visible = page.open
             }, section.visibleContent)
             --
@@ -3491,7 +3491,7 @@ do
             local colorpicker_frame = utility:Create("Frame", {Vector2.new(1,1), colorpicker_inline}, {
                 Size = utility:Size(1, -2, 1, -2, colorpicker_inline),
                 Position = utility:Position(0, 1, 0, 1, colorpicker_inline),
-                Color = def,
+                BackgroundColor3 = def,
                 Transparency = transp and (1 - transp) or 1,
                 Visible = page.open
             }, section.visibleContent)
@@ -3511,13 +3511,13 @@ do
             function colorpicker:Set(color, transp_val)
                 if typeof(color) == "table" then
                     colorpicker.current = color
-                    colorpicker_frame.Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                    colorpicker_frame.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                     colorpicker_frame.Transparency = 1 - colorpicker.current[4]
                     callback(Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3]), colorpicker.current[4])
                 elseif typeof(color) == "color3" then
                     local h, s, v = color:ToHSV()
                     colorpicker.current = {h, s, v, (transp_val or 0)}
-                    colorpicker_frame.Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                    colorpicker_frame.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                     colorpicker_frame.Transparency = 1 - colorpicker.current[4]
                     callback(Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3]), colorpicker.current[4]) 
                 end
@@ -3535,7 +3535,7 @@ do
                     utility:UpdateOffset(colorpicker.holder.picker_cursor, {Vector2.new((colorpicker.holder.picker.Size.X*colorpicker.current[2])-3,(colorpicker.holder.picker.Size.Y*(1-colorpicker.current[3]))-3), colorpicker.holder.picker})
                     --
                     if colorpicker.holder.transparencybg then
-                        colorpicker.holder.transparencybg.Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                        colorpicker.holder.transparencybg.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                     end
                 elseif colorpicker.open and colorpicker.holder.huepicker and colorpicker.holding.huepicker then
                     colorpicker.current[1] = (math.clamp(mouseLocation.Y - colorpicker.holder.huepicker.Position.Y, 0, colorpicker.holder.huepicker.Size.Y) / colorpicker.holder.huepicker.Size.Y)
@@ -3543,18 +3543,18 @@ do
                     colorpicker.holder.huepicker_cursor[1].Position = utility:Position(0, -3, colorpicker.current[1], -3, colorpicker.holder.huepicker)
                     colorpicker.holder.huepicker_cursor[2].Position = utility:Position(0, 1, 0, 1, colorpicker.holder.huepicker_cursor[1])
                     colorpicker.holder.huepicker_cursor[3].Position = utility:Position(0, 1, 0, 1, colorpicker.holder.huepicker_cursor[2])
-                    colorpicker.holder.huepicker_cursor[3].Color = Color3.fromHSV(colorpicker.current[1], 1, 1)
+                    colorpicker.holder.huepicker_cursor[3].BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], 1, 1)
                     --
                     utility:UpdateOffset(colorpicker.holder.huepicker_cursor[1], {Vector2.new(-3,(colorpicker.holder.huepicker.Size.Y*colorpicker.current[1])-3), colorpicker.holder.huepicker})
                     --
-                    colorpicker.holder.background.Color = Color3.fromHSV(colorpicker.current[1], 1, 1)
+                    colorpicker.holder.background.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], 1, 1)
                     --
                     if colorpicker.holder.transparency_cursor and colorpicker.holder.transparency_cursor[3] then
-                        colorpicker.holder.transparency_cursor[3].Color = Color3.fromHSV(0, 0, 1 - colorpicker.current[4])
+                        colorpicker.holder.transparency_cursor[3].BackgroundColor3 = Color3.fromHSV(0, 0, 1 - colorpicker.current[4])
                     end
                     --
                     if colorpicker.holder.transparencybg then
-                        colorpicker.holder.transparencybg.Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                        colorpicker.holder.transparencybg.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                     end
                 elseif colorpicker.open and colorpicker.holder.transparency and colorpicker.holding.transparency then
                     colorpicker.current[4] = 1 - (math.clamp(mouseLocation.X - colorpicker.holder.transparency.Position.X, 0, colorpicker.holder.transparency.Size.X) / colorpicker.holder.transparency.Size.X)
@@ -3562,13 +3562,13 @@ do
                     colorpicker.holder.transparency_cursor[1].Position = utility:Position(1-colorpicker.current[4], -3, 0, -3, colorpicker.holder.transparency)
                     colorpicker.holder.transparency_cursor[2].Position = utility:Position(0, 1, 0, 1, colorpicker.holder.transparency_cursor[1])
                     colorpicker.holder.transparency_cursor[3].Position = utility:Position(0, 1, 0, 1, colorpicker.holder.transparency_cursor[2])
-                    colorpicker.holder.transparency_cursor[3].Color = Color3.fromHSV(0, 0, 1 - colorpicker.current[4])
+                    colorpicker.holder.transparency_cursor[3].BackgroundColor3 = Color3.fromHSV(0, 0, 1 - colorpicker.current[4])
                     colorpicker_frame.Transparency = (1 - colorpicker.current[4])
                     --
                     utility:UpdateTransparency(colorpicker_frame, (1 - colorpicker.current[4]))
                     utility:UpdateOffset(colorpicker.holder.transparency_cursor[1], {Vector2.new((colorpicker.holder.transparency.Size.X*(1-colorpicker.current[4]))-3,-3), colorpicker.holder.transparency})
                     --
-                    colorpicker.holder.background.Color = Color3.fromHSV(colorpicker.current[1], 1, 1)
+                    colorpicker.holder.background.BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], 1, 1)
                 end
                 --
                 colorpicker:Set(colorpicker.current)
@@ -3599,52 +3599,52 @@ do
                             local colorpicker_open_outline = utility:Create("Frame", {Vector2.new(4,colorpicker.axis + 19), section.section_frame}, {
                                 Size = utility:Size(1, -8, 0, transp and 219 or 200, section.section_frame),
                                 Position = utility:Position(0, 4, 0, colorpicker.axis + 19, section.section_frame),
-                                Color = theme.outline
+                                BackgroundColor3 = theme.outline
                             }, colorpicker.holder.drawings);colorpicker.holder.inline = colorpicker_open_outline
                             --
                             local colorpicker_open_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_outline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_outline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_outline),
-                                Color = theme.inline
+                                BackgroundColor3 = theme.inline
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_frame = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_inline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_inline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_inline),
-                                Color = theme.dark_contrast
+                                BackgroundColor3 = theme.dark_contrast
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_accent = utility:Create("Frame", {Vector2.new(0,0), colorpicker_open_frame}, {
                                 Size = utility:Size(1, 0, 0, 2, colorpicker_open_frame),
                                 Position = utility:Position(0, 0, 0, 0, colorpicker_open_frame),
-                                Color = theme.accent
+                                BackgroundColor3 = theme.accent
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_title = utility:Create("TextLabel", {Vector2.new(4,2), colorpicker_open_frame}, {
                                 Text = cpinfo,
                                 Size = theme.textsize,
                                 Font = theme.font,
-                                Color = theme.textcolor,
-                                OutlineColor = theme.textborder,
+                                BackgroundColor3 = theme.textcolor,
+                                OutlineBackgroundColor3 = theme.textborder,
                                 Position = utility:Position(0, 4, 0, 2, colorpicker_open_frame),
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_picker_outline = utility:Create("Frame", {Vector2.new(4,17), colorpicker_open_frame}, {
                                 Size = utility:Size(1, -27, 1, transp and -40 or -21, colorpicker_open_frame),
                                 Position = utility:Position(0, 4, 0, 17, colorpicker_open_frame),
-                                Color = theme.outline
+                                BackgroundColor3 = theme.outline
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_picker_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_picker_outline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_picker_outline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_picker_outline),
-                                Color = theme.inline
+                                BackgroundColor3 = theme.inline
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_picker_bg = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_picker_inline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_picker_inline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_picker_inline),
-                                Color = Color3.fromHSV(colorpicker.current[1],1,1)
+                                BackgroundColor3 = Color3.fromHSV(colorpicker.current[1],1,1)
                             }, colorpicker.holder.drawings);colorpicker.holder.background = colorpicker_open_picker_bg
                             --
                             local colorpicker_open_picker_image = utility:Create("Image", {Vector2.new(0,0), colorpicker_open_picker_bg}, {
@@ -3660,13 +3660,13 @@ do
                             local colorpicker_open_huepicker_outline = utility:Create("Frame", {Vector2.new(colorpicker_open_frame.Size.X-19,17), colorpicker_open_frame}, {
                                 Size = utility:Size(0, 15, 1, transp and -40 or -21, colorpicker_open_frame),
                                 Position = utility:Position(1, -19, 0, 17, colorpicker_open_frame),
-                                Color = theme.outline
+                                BackgroundColor3 = theme.outline
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_huepicker_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_huepicker_outline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_huepicker_outline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_huepicker_outline),
-                                Color = theme.inline
+                                BackgroundColor3 = theme.inline
                             }, colorpicker.holder.drawings)
                             --
                             local colorpicker_open_huepicker_image = utility:Create("Image", {Vector2.new(1,1), colorpicker_open_huepicker_inline}, {
@@ -3677,38 +3677,38 @@ do
                             local colorpicker_open_huepicker_cursor_outline = utility:Create("Frame", {Vector2.new(-3,(colorpicker_open_huepicker_image.Size.Y*colorpicker.current[1])-3), colorpicker_open_huepicker_image}, {
                                 Size = utility:Size(1, 6, 0, 6, colorpicker_open_huepicker_image),
                                 Position = utility:Position(0, -3, colorpicker.current[1], -3, colorpicker_open_huepicker_image),
-                                Color = theme.outline
+                                BackgroundColor3 = theme.outline
                             }, colorpicker.holder.drawings);colorpicker.holder.huepicker_cursor[1] = colorpicker_open_huepicker_cursor_outline
                             --
                             local colorpicker_open_huepicker_cursor_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_huepicker_cursor_outline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_huepicker_cursor_outline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_huepicker_cursor_outline),
-                                Color = theme.textcolor
+                                BackgroundColor3 = theme.textcolor
                             }, colorpicker.holder.drawings);colorpicker.holder.huepicker_cursor[2] = colorpicker_open_huepicker_cursor_inline
                             --
-                            local colorpicker_open_huepicker_cursor_color = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_huepicker_cursor_inline}, {
+                            local colorpicker_open_huepicker_cursor_BackgroundColor3 = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_huepicker_cursor_inline}, {
                                 Size = utility:Size(1, -2, 1, -2, colorpicker_open_huepicker_cursor_inline),
                                 Position = utility:Position(0, 1, 0, 1, colorpicker_open_huepicker_cursor_inline),
-                                Color = Color3.fromHSV(colorpicker.current[1], 1, 1)
+                                BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], 1, 1)
                             }, colorpicker.holder.drawings);colorpicker.holder.huepicker_cursor[3] = colorpicker_open_huepicker_cursor_color
                             --
                             if transp then
                                 local colorpicker_open_transparency_outline = utility:Create("Frame", {Vector2.new(4,colorpicker_open_frame.Size.X-19), colorpicker_open_frame}, {
                                     Size = utility:Size(1, -27, 0, 15, colorpicker_open_frame),
                                     Position = utility:Position(0, 4, 1, -19, colorpicker_open_frame),
-                                    Color = theme.outline
+                                    BackgroundColor3 = theme.outline
                                 }, colorpicker.holder.drawings)
                                 --
                                 local colorpicker_open_transparency_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_outline}, {
                                     Size = utility:Size(1, -2, 1, -2, colorpicker_open_transparency_outline),
                                     Position = utility:Position(0, 1, 0, 1, colorpicker_open_transparency_outline),
-                                    Color = theme.inline
+                                    BackgroundColor3 = theme.inline
                                 }, colorpicker.holder.drawings)
                                 --
                                 local colorpicker_open_transparency_bg = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_inline}, {
                                     Size = utility:Size(1, -2, 1, -2, colorpicker_open_transparency_inline),
                                     Position = utility:Position(0, 1, 0, 1, colorpicker_open_transparency_inline),
-                                    Color = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
+                                    BackgroundColor3 = Color3.fromHSV(colorpicker.current[1], colorpicker.current[2], colorpicker.current[3])
                                 }, colorpicker.holder.drawings);colorpicker.holder.transparencybg = colorpicker_open_transparency_bg
                                 --
                                 local colorpicker_open_transparency_image = utility:Create("Image", {Vector2.new(1,1), colorpicker_open_transparency_inline}, {
@@ -3719,19 +3719,19 @@ do
                                 local colorpicker_open_transparency_cursor_outline = utility:Create("Frame", {Vector2.new((colorpicker_open_transparency_image.Size.X*(1-colorpicker.current[4]))-3,-3), colorpicker_open_transparency_image}, {
                                     Size = utility:Size(0, 6, 1, 6, colorpicker_open_transparency_image),
                                     Position = utility:Position(1-colorpicker.current[4], -3, 0, -3, colorpicker_open_transparency_image),
-                                    Color = theme.outline
+                                    BackgroundColor3 = theme.outline
                                 }, colorpicker.holder.drawings);colorpicker.holder.transparency_cursor[1] = colorpicker_open_transparency_cursor_outline
                                 --
                                 local colorpicker_open_transparency_cursor_inline = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_cursor_outline}, {
                                     Size = utility:Size(1, -2, 1, -2, colorpicker_open_transparency_cursor_outline),
                                     Position = utility:Position(0, 1, 0, 1, colorpicker_open_transparency_cursor_outline),
-                                    Color = theme.textcolor
+                                    BackgroundColor3 = theme.textcolor
                                 }, colorpicker.holder.drawings);colorpicker.holder.transparency_cursor[2] = colorpicker_open_transparency_cursor_inline
                                 --
-                                local colorpicker_open_transparency_cursor_color = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_cursor_inline}, {
+                                local colorpicker_open_transparency_cursor_BackgroundColor3 = utility:Create("Frame", {Vector2.new(1,1), colorpicker_open_transparency_cursor_inline}, {
                                     Size = utility:Size(1, -2, 1, -2, colorpicker_open_transparency_cursor_inline),
                                     Position = utility:Position(0, 1, 0, 1, colorpicker_open_transparency_cursor_inline),
-                                    Color = Color3.fromHSV(0, 0, 1 - colorpicker.current[4]),
+                                    BackgroundColor3 = Color3.fromHSV(0, 0, 1 - colorpicker.current[4]),
                                 }, colorpicker.holder.drawings);colorpicker.holder.transparency_cursor[3] = colorpicker_open_transparency_cursor_color
                                 --
                                 utility:LoadImage(colorpicker_open_transparency_image, "transp", "https://i.imgur.com/ncssKbH.png")
@@ -3841,21 +3841,21 @@ do
         local configLoader_outline = utility:Create("Frame", {Vector2.new(4,configLoader.axis), section.section_frame}, {
             Size = utility:Size(1, -8, 0, 148, section.section_frame),
             Position = utility:Position(0, 4, 0, configLoader.axis, section.section_frame),
-            Color = theme.outline,
+            BackgroundColor3 = theme.outline,
             Visible = page.open
         }, section.visibleContent)
         --
         local configLoader_inline = utility:Create("Frame", {Vector2.new(1,1), configLoader_outline}, {
             Size = utility:Size(1, -2, 1, -2, configLoader_outline),
             Position = utility:Position(0, 1, 0, 1, configLoader_outline),
-            Color = theme.inline,
+            BackgroundColor3 = theme.inline,
             Visible = page.open
         }, section.visibleContent)
         --
         local configLoader_frame = utility:Create("Frame", {Vector2.new(1,1), configLoader_inline}, {
             Size = utility:Size(1, -2, 1, -2, configLoader_inline),
             Position = utility:Position(0, 1, 0, 1, configLoader_inline),
-            Color = theme.light_contrast,
+            BackgroundColor3 = theme.light_contrast,
             Visible = page.open
         }, section.visibleContent)
         --
@@ -3871,8 +3871,8 @@ do
                 Text = "Config-Slot: "..tostring(i),
                 Size = theme.textsize,
                 Font = theme.font,
-                Color = i == 1 and theme.accent or theme.textcolor,
-                OutlineColor = theme.textborder,
+                BackgroundColor3 = i == 1 and theme.accent or theme.textcolor,
+                OutlineBackgroundColor3 = theme.textborder,
                 Center = true,
                 Position = utility:Position(0.5, 0, 0, 2 + (18 * (i-1)), configLoader_frame),
                 Visible = page.open
@@ -3885,7 +3885,7 @@ do
         --
         function configLoader:Refresh()
             for i,v in pairs(configLoader.buttons) do
-                v.Color = i == configLoader.current and theme.accent or theme.textcolor
+                v.BackgroundColor3 = i == configLoader.current and theme.accent or theme.textcolor
             end
         end
         --
