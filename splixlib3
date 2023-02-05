@@ -104,7 +104,7 @@ do
             local frame = Instance.new("Frame",game.CoreGui)
             frame.Visible = true
             frame.BackgroundColor3 = Color3.fromRGB(255,255,255)
-            frame.Size = Vector2.new(100,100)
+            frame.Size = UDim2.new(0, 100, 0, 100)
             frame.Position = Vector2.new(0,0)
             frame.ZIndex = 50
             frame.Transparency = library.shared.initialized and 1 or 0
